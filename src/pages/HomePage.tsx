@@ -57,49 +57,42 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const services = [
     {
-      num: '01',
       title: 'Contract Staffing',
       desc: "Executive-to-Senior-level contract staffing on UNIVA's payroll, payroll and statutory administration, scale up or down without permanent headcount.",
       icon: Users,
       badge: 'Core Solution',
     },
     {
-      num: '02',
       title: 'Recruitment Services',
       desc: 'Permanent Recruitment, Executive Search, Requirement Fulfilment, Candidate Screening, and Recruitment Process Outsourcing (RPO).',
       icon: Briefcase,
       badge: 'Executive Search',
     },
     {
-      num: '03',
       title: 'Corporate Event Management',
       desc: 'Planning, coordination and on-ground execution for conferences, seminars, employee engagement activities, and annual celebrations.',
       icon: Calendar,
       badge: 'Engagement',
     },
     {
-      num: '04',
       title: 'Audit Services',
       desc: 'Workplace safety compliance audits, HR process & documentation audits, ISO audit support, operational risk assessment, and gap analyses.',
       icon: FileCheck2,
       badge: 'Governance',
     },
     {
-      num: '05',
       title: 'Training & Skill Development',
       desc: 'Technical skills development, communication and soft-skills, employee development journeys, professional corporate programs, and safety awareness.',
       icon: GraduationCap,
       badge: 'Capability',
     },
     {
-      num: '06',
       title: 'Workplace Safety Training & Support',
       desc: 'Safety awareness programs, hazard identification & risk assessment (HIRA), instructor-led training, and site safety inspections.',
       icon: AlertTriangle,
       badge: 'Safety First',
     },
     {
-      num: '07',
       title: 'Onboarding & HR Support',
       desc: 'Joining formalities, documentation verification, HR records management, attendance & leave administration, and employee grievance support.',
       icon: UserCheck,
@@ -272,20 +265,19 @@ export const HomePage: React.FC<HomePageProps> = ({
             const Icon = srv.icon;
             return (
               <div
-                key={srv.num}
+                key={srv.title}
                 onClick={() => onNavigate('services')}
-                className="bg-white rounded-xl border border-[#DCDDEE] p-6 hover:shadow-md hover:border-[#3B2FBF]/40 transition-all flex flex-col justify-between cursor-pointer group"
+                className="bg-white rounded-xl border border-[#DCDDEE] p-6 hover:shadow-md hover:border-[#0E9F80]/60 transition-all flex flex-col justify-between cursor-pointer group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-extrabold text-[#3B2FBF] tracking-wider">
-                      SERVICE {srv.num}
                     </span>
                     <span className="text-[11px] font-semibold text-[#0E9F80] bg-teal-50 px-2 py-0.5 rounded">
                       {srv.badge}
                     </span>
                   </div>
-                  <div className="w-10 h-10 rounded-lg bg-slate-100 group-hover:bg-[#3B2FBF] group-hover:text-white text-[#1B1A4E] flex items-center justify-center transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-[#3B2FBF]/10 group-hover:bg-[#0E9F80] group-hover:text-white text-[#3B2FBF] flex items-center justify-center transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-[#1B1A4E] group-hover:text-[#3B2FBF] transition-colors">
@@ -342,7 +334,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               Sectors We Serve
             </h2>
             <p className="text-sm text-[#55587A]">
-              Our specialized workforce and recruitment solutions are tailored to the unique operational demands and regulatory nuances of key Indian industries.
+              Our workforce and recruitment solutions are tailored to the distinct roles, skills and operational needs of each industry.
             </p>
           </div>
 
