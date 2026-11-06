@@ -38,6 +38,19 @@ import {
   RecruiterNote,
 } from '../types';
 
+
+const readApiJson = async (response: Response) => {
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error('The UNIVA API is unavailable or returned an unexpected page. Please wait for the latest deployment and try again.');
+  }
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || 'The request could not be completed.');
+  }
+  return data;
+};
+
 interface AdminPortalProps {
   onNavigateHome: () => void;
   currentUser: User | null;
@@ -52,8 +65,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   onLogout,
 }) => {
   // Login form state
-  const [loginEmail, setLoginEmail] = useState('admin@univahiretech.com');
-  const [loginPassword, setLoginPassword] = useState('admin123');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
@@ -111,10 +124,12 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
         fetch('/api/enquiries'),
       ]);
 
-      const statsData = await statsRes.json();
-      const jobsData = await jobsRes.json();
-      const appsData = await appsRes.json();
-      const enqData = await enqRes.json();
+      const [statsData, jobsData, appsData, enqData] = await Promise.all([
+        readApiJson(statsRes),
+        readApiJson(jobsRes),
+        readApiJson(appsRes),
+        readApiJson(enqRes),
+      ]);
 
       setStats(statsData);
       setJobs(jobsData.jobs || []);
@@ -146,10 +161,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
         body: JSON.stringify({ email: loginEmail, password: loginPassword }),
       });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Login failed');
-      }
+      const data = await readApiJson(res);
 
       onLogin(data.user);
     } catch (err: any) {
@@ -398,21 +410,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
             </p>
           </div>
 
-          {/* Quick Credential Hint Banner */}
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5 text-xs text-[#55587A]">
-            <span className="font-bold text-[#1B1A4E] block">
-              Pre-Seeded Credentials for Staff Testing:
-            </span>
-            <div className="flex items-center justify-between text-[11px] pt-1 border-t border-slate-200">
-              <span><strong>Admin:</strong> admin@univahiretech.com</span>
-              <span className="font-mono bg-slate-200 px-1.5 py-0.5 rounded">admin123</span>
-            </div>
-            <div className="flex items-center justify-between text-[11px]">
-              <span><strong>Recruiter:</strong> recruiter@univahiretech.com</span>
-              <span className="font-mono bg-slate-200 px-1.5 py-0.5 rounded">recruiter123</span>
-            </div>
-          </div>
-
           {loginError && (
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700 flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
@@ -428,6 +425,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <input
                 type="email"
                 required
+                autoComplete="username"
+                placeholder="name@company.com"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 className="w-full px-3 py-2 bg-slate-50 border border-[#DCDDEE] rounded-lg text-xs text-[#1B1A4E] focus:outline-none focus:border-[#3B2FBF] focus:bg-white"
@@ -441,6 +440,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <input
                 type="password"
                 required
+                autoComplete="current-password"
+                placeholder="Enter your password"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 className="w-full px-3 py-2 bg-slate-50 border border-[#DCDDEE] rounded-lg text-xs text-[#1B1A4E] focus:outline-none focus:border-[#3B2FBF] focus:bg-white"
