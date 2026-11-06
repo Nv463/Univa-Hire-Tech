@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UnivaLogo } from './UnivaLogo';
-import { Menu, X, ArrowUpRight, ShieldCheck, UserCheck } from 'lucide-react';
+import { Menu, X, ArrowUpRight, UserCheck } from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
@@ -21,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'services', label: 'Services' },
     { id: 'industries', label: 'Industries' },
     { id: 'how-we-work', label: 'How We Work' },
-    { id: 'compliance', label: 'Compliance' },
     { id: 'jobs', label: 'Careers / Jobs' },
   ];
 
@@ -33,11 +32,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#DCDDEE] transition-all">
-      {/* Top micro-bar for Pan-India compliance assurance */}
+      {/* Top micro-bar for Pan-India service presence */}
       <div className="bg-[#1B1A4E] text-white text-xs py-1.5 px-4 sm:px-8 flex items-center justify-between text-slate-300">
         <div className="flex items-center gap-2 text-[11px] sm:text-xs">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#0E9F80]" />
-          <span>India DPDP Act 2023 Compliant · 100% Statutory Adherence (EPF, ESIC, Contract Labour)</span>
+          <span>Integrated Workforce Solutions · Recruitment · Pan-India Delivery</span>
         </div>
         <div className="hidden md:flex items-center gap-4 text-[11px] text-slate-300">
           <span>Pan-India Executive Sourcing</span>
