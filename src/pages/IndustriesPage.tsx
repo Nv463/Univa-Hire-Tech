@@ -10,7 +10,6 @@ import {
   Building2,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
 } from 'lucide-react';
 
 interface IndustriesPageProps {
@@ -31,8 +30,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Technical Product & Project Managers',
         'GCC Operational Leaders',
       ],
-      complianceFocus:
-        'IP protection clauses, non-disclosure agreements (NDAs), DPDP Act 2023 compliance, remote workforce tracking.',
     },
     {
       id: 'manufacturing',
@@ -46,8 +43,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Maintenance & Reliability Engineers',
         'EHS & Industrial Safety Officers',
       ],
-      complianceFocus:
-        'Factories Act 1948, OHSAS/ISO 45001 safety compliance, Contract Labour (R&A) Act, biometric attendance registers.',
     },
     {
       id: 'construction-infra',
@@ -61,8 +56,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'MEP Coordinators & Surveyors',
         'Site Safety Stewards & Supervisors',
       ],
-      complianceFocus:
-        'BOCW Act (Building and Other Construction Workers), Workmen Compensation Insurance, hazardous duty safety training.',
     },
     {
       id: 'bfsi',
@@ -76,8 +69,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Branch Operations Managers',
         'Wealth & Commercial Banking Executives',
       ],
-      complianceFocus:
-        'RBI background verification guidelines, SEBI regulatory mandates, data integrity, strict criminal background checks.',
     },
     {
       id: 'healthcare',
@@ -91,8 +82,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Biomedical Waste & Facility Managers',
         'Pharmaceutical QA & Regulatory Associates',
       ],
-      complianceFocus:
-        'NABH standard documentation, Clinical Establishments Act, professional indemnity, biological safety training.',
     },
     {
       id: 'retail',
@@ -106,8 +95,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Customer Support Shift Leaders',
         'Store Inventory & Loss Prevention Leads',
       ],
-      complianceFocus:
-        'Shops and Commercial Establishments Act, shift allowance norms, overtime regulations, minimum wage compliance.',
     },
     {
       id: 'logistics',
@@ -121,8 +108,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Fleet Operations & Dispatch Leads',
         'Warehouse Inventory Controllers',
       ],
-      complianceFocus:
-        'Warehouse safety norms, Motor Vehicles Act norms for logistics, overtime tracking, ESIC coverage for material handlers.',
     },
     {
       id: 'corporate-services',
@@ -136,8 +121,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
         'Corporate Facilities & Real Estate Managers',
         'Executive Assistants & Office Administrators',
       ],
-      complianceFocus:
-        'POSH Act (Internal Complaints Committee), Professional Tax, TDS compliance, gratuity trust governance.',
     },
   ];
 
@@ -153,7 +136,7 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
             Sectors We Serve
           </h1>
           <p className="text-base sm:text-lg text-slate-200 max-w-3xl leading-relaxed">
-            Our workforce solutions are specifically customized to support a wide range of industries, balancing technical role requirements with regional statutory compliance.
+            Our workforce solutions are tailored to the roles, skills and operating environments of a wide range of industries.
           </p>
         </div>
       </section>
@@ -198,16 +181,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigate }) =>
                     </ul>
                   </div>
 
-                  {/* Compliance Focus */}
-                  <div className="pt-3 border-t border-slate-100">
-                    <div className="flex items-start gap-2 text-xs text-[#55587A]">
-                      <ShieldCheck className="w-4 h-4 text-[#3B2FBF] shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-[#1B1A4E]">Statutory Nuances: </strong>
-                        <span>{ind.complianceFocus}</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
