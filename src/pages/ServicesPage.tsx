@@ -28,7 +28,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   const servicesList = [
     {
       id: 'contract-staffing',
-      num: '01',
       title: 'Contract Staffing',
       subtitle: 'Flexible manpower, managed end to end.',
       quote:
@@ -62,7 +61,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'recruitment-services',
-      num: '02',
       title: 'Recruitment Services',
       subtitle: 'Quality hiring, delivered on time.',
       quote: 'Shortlists that are screened, relevant, and ready for interview.',
@@ -95,7 +93,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'corporate-events',
-      num: '03',
       title: 'Corporate Event Management',
       subtitle: 'Events that engage teams and represent your brand.',
       quote: 'One accountable partner from concept to closing.',
@@ -128,7 +125,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'audit-services',
-      num: '04',
       title: 'Audit Services',
       subtitle: 'Clear visibility into compliance, process and risk.',
       quote: 'Know where you stand, and what to fix first.',
@@ -161,7 +157,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'training-development',
-      num: '05',
       title: 'Training & Skill Development',
       subtitle: 'Building capability that lasts beyond the session.',
       quote: 'Better-prepared teams and stronger on-the-job performance.',
@@ -194,7 +189,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'workplace-safety',
-      num: '06',
       title: 'Workplace Safety Training & Support',
       subtitle: 'Safer workplaces through awareness and practice.',
       quote: 'Reduce workplace risk and build a stronger safety culture.',
@@ -227,7 +221,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     },
     {
       id: 'onboarding-hr-support',
-      num: '07',
       title: 'Onboarding & HR Support',
       subtitle: 'From the first day to the last, handled with care.',
       quote: 'Less HR paperwork. More time for people and performance.',
@@ -305,7 +298,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               >
                 <Icon className={`w-4 h-4 ${isSelected ? 'text-[#0E9F80]' : 'text-[#3B2FBF]'}`} />
                 <span>
-                  {srv.num}. {srv.title}
+                  {srv.title}
                 </span>
               </button>
             );
@@ -319,7 +312,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#0E9F80]">
-                  SERVICE {current.num}
                 </span>
                 <span className="text-[11px] font-semibold text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
                   UNIVA Standard
@@ -440,9 +432,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-extrabold text-[#3B2FBF]">
-                    SERVICE {srv.num}
-                  </span>
                   <Icon className="w-5 h-5 text-[#3B2FBF]" />
                 </div>
                 <h4 className="text-base font-bold text-[#1B1A4E] mb-1">
