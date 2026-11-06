@@ -6,6 +6,12 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
+    publicDir: false,
+    build: {
+      // Vercel serves files from /public via its CDN while server.ts handles API routes.
+      outDir: 'public',
+      emptyOutDir: false,
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
