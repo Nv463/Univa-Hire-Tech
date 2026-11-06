@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnivaLogo } from './UnivaLogo';
-import { Download, Mail, Phone, MapPin, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -40,10 +40,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </a>
             </div>
 
-            <div className="flex items-center gap-2 pt-2 text-xs text-emerald-400 font-medium">
-              <CheckCircle2 className="w-4 h-4 shrink-0 text-[#0E9F80]" />
-              <span>Full compliance with India DPDP Act 2023 & Labor Codes</span>
-            </div>
           </div>
 
           {/* Col 3: Services */}
@@ -188,25 +184,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Compliance Note Banner */}
-        <div className="py-4 my-6 px-4 bg-slate-800/60 rounded-lg border border-slate-700/80 text-xs text-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#0E9F80] shrink-0" />
-            <span className="font-medium text-slate-200">
-              Statutory Governance Note:
-            </span>
-            <span className="italic text-slate-400">
-              Compliance support is delivered as applicable to the scope, location and nature of each engagement.
-            </span>
-          </div>
-          <button
-            onClick={() => handleNav('compliance')}
-            className="text-xs text-[#0E9F80] hover:underline font-semibold whitespace-nowrap"
-          >
-            Review Statutory Framework &rarr;
-          </button>
-        </div>
-
         {/* Bottom Sub-Footer */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <div className="flex items-center gap-4 flex-wrap">
@@ -214,10 +191,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <span aria-hidden="true">·</span>
             <button onClick={() => handleNav('privacy')} className="hover:text-white">
               Privacy Policy (DPDP Act)
-            </button>
-            <span aria-hidden="true">·</span>
-            <button onClick={() => handleNav('compliance')} className="hover:text-white">
-              Statutory Terms
             </button>
           </div>
 
