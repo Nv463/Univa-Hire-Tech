@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Ensure data directories exist
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.VERCEL ? path.join('/tmp', 'univa-data') : path.join(__dirname, 'data');
 const RESUMES_DIR = path.join(DATA_DIR, 'resumes');
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(RESUMES_DIR)) fs.mkdirSync(RESUMES_DIR, { recursive: true });
@@ -571,7 +571,7 @@ app.post('/api/auth/login', (req, res) => {
   );
 
   if (!user) {
-    return res.status(401).json({ error: 'Invalid corporate email or password. Use admin@univahiretech.com / admin123' });
+    return res.status(401).json({ error: 'Invalid corporate email or password.' });
   }
 
   // Return clean user profile without password
@@ -1107,7 +1107,24 @@ app.get('/api/stats', (_req, res) => {
   });
 });
 
-// Vite Middleware Setup for Dev / Static in Prod
+// Vercel serves the SPA for direct links such as /admin and /jobs.
+// API misses always return JSON rather than the SPA HTML document.
+if (process.env.VERCEL) {
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api/')) {
+      return res.status(404).json({ error: 'API endpoint not found.' });
+    }
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      return next();
+    }
+    res.sendFile(path.join(__dirname, 'public', 'index.html'), (error) => {
+      if (error) next(error);
+    });
+  });
+}
+
+// Vite middleware is used for local development. On Vercel, the exported
+// Express app is the serverless backend and Vercel serves public assets.
 async function startServer() {
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
@@ -1117,10 +1134,9 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath));
+    app.use(express.static(path.join(__dirname, 'public')));
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
   }
 
@@ -1129,4 +1145,8 @@ async function startServer() {
   });
 }
 
-startServer();
+if (!process.env.VERCEL) {
+  startServer();
+}
+
+export default app;
