@@ -6,7 +6,6 @@ import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { IndustriesPage } from './pages/IndustriesPage';
 import { HowWeWorkPage } from './pages/HowWeWorkPage';
-import { CompliancePage } from './pages/CompliancePage';
 import { JobsPage } from './pages/JobsPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPortal } from './pages/AdminPortal';
@@ -47,8 +46,6 @@ export default function App() {
         setActivePage('industries');
       } else if (path === 'how-we-work' || hash === 'how-we-work') {
         setActivePage('how-we-work');
-      } else if (path === 'compliance' || hash === 'compliance') {
-        setActivePage('compliance');
       } else if (path === 'privacy' || hash === 'privacy') {
         setActivePage('privacy');
       }
@@ -148,10 +145,6 @@ export default function App() {
 
         {activePage === 'how-we-work' && (
           <HowWeWorkPage onNavigate={handleNavigate} />
-        )}
-
-        {activePage === 'compliance' && (
-          <CompliancePage onNavigate={handleNavigate} />
         )}
 
         {activePage === 'jobs' && (
