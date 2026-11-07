@@ -942,14 +942,18 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                         {/* Action buttons */}
                         <td className="py-3.5 px-4 text-right">
                           <div className="flex items-center justify-end gap-2">
-                            <button
-                              type="button"
-                              onClick={() => downloadProtectedFile('/api/applications/' + app.id + '/resume', app.resume_filename || 'resume.pdf', true)}
-                              title="Download / View PDF Resume"
-                              className="p-1.5 text-[#3B2FBF] hover:bg-indigo-50 rounded"
-                            >
-                              <FileText className="w-4 h-4" />
-                            </button>
+                            {app.resume_path ? (
+                              <button
+                                type="button"
+                                onClick={() => downloadProtectedFile('/api/applications/' + app.id + '/resume', app.resume_filename || 'resume.pdf', true)}
+                                title="Download / View PDF Resume"
+                                className="p-1.5 text-[#3B2FBF] hover:bg-indigo-50 rounded"
+                              >
+                                <FileText className="w-4 h-4" />
+                              </button>
+                            ) : (
+                              <span className="px-2 text-[10px] text-slate-400">No resume</span>
+                            )}
                             <button
                               onClick={() => setSelectedApplicant(app)}
                               className="px-2.5 py-1 text-xs font-bold text-[#1B1A4E] hover:bg-slate-100 rounded border border-slate-200"
@@ -1048,14 +1052,18 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={() => downloadProtectedFile('/api/applications/' + selectedApplicant.id + '/resume', selectedApplicant.resume_filename || 'resume.pdf', true)}
-                className="px-3.5 py-1.5 bg-[#3B2FBF] hover:bg-[#3227a8] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
-              >
-                <span>View PDF</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              {selectedApplicant.resume_path ? (
+                <button
+                  type="button"
+                  onClick={() => downloadProtectedFile('/api/applications/' + selectedApplicant.id + '/resume', selectedApplicant.resume_filename || 'resume.pdf', true)}
+                  className="px-3.5 py-1.5 bg-[#3B2FBF] hover:bg-[#3227a8] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
+                >
+                  <span>View PDF</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+              ) : (
+                <span className="text-xs text-slate-500">No resume file uploaded</span>
+              )}
             </div>
 
             {/* Pipeline Stage Select */}
