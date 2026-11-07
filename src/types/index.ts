@@ -84,6 +84,8 @@ export interface User {
   email: string;
   role: 'Admin' | 'Recruiter';
   designation: string;
+  access_token?: string;
+  refresh_token?: string;
 }
 
 export interface DashboardStats {
