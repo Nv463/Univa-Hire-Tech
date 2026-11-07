@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Job, Application } from '../types';
+import { apiFetch } from '../lib/api';
 
 interface JobsPageProps {
   jobs: Job[];
@@ -190,7 +191,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
         formData.append('resume', resumeFile);
       }
 
-      const res = await fetch('/api/applications', {
+      const res = await apiFetch('/api/applications', {
         method: 'POST',
         body: formData,
       });
