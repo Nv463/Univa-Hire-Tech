@@ -56,6 +56,7 @@ export interface Application {
   notice_period: string;
   location: string;
   resume_filename: string;
+  resume_path?: string | null;
   status: ApplicationStatus;
   notes: RecruiterNote[];
   consent_given: boolean;
