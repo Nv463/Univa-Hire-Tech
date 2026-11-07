@@ -1,11 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import JSZip from 'jszip';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 
@@ -270,9 +267,9 @@ app.delete('/api/jobs/:id', staffAuth, requireAdmin, async (req: any, res) => {
 
 app.get('/api/applications', staffAuth, async (req: any, res) => {
   try {
-    const { data, error } = await req.supabase.from('applications').select('data').order('created_at', { ascending: false });
+    const { data, error } = await req.supabase.from('applications').select('data,resume_path').order('created_at', { ascending: false });
     if (error) throw error;
-    let applications = getDataRows(data || []);
+    let applications = (data || []).map((row: any) => ({ ...row.data, resume_path: row.resume_path }));
     const jobId = String(req.query.job_id || 'all');
     const status = String(req.query.status || 'all');
     const search = String(req.query.search || '').toLowerCase();
