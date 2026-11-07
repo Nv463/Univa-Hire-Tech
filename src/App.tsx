@@ -11,6 +11,7 @@ import { ContactPage } from './pages/ContactPage';
 import { AdminPortal } from './pages/AdminPortal';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { Job, User } from './types';
+import { apiFetch } from './lib/api';
 
 export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
@@ -20,7 +21,8 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
     try {
       const stored = localStorage.getItem('univa_user');
-      return stored ? JSON.parse(stored) : null;
+      const user = stored ? JSON.parse(stored) : null;
+      return user?.access_token ? user : null;
     } catch {
       return null;
     }
@@ -59,7 +61,7 @@ export default function App() {
   // Fetch open jobs
   const fetchOpenJobs = async () => {
     try {
-      const res = await fetch('/api/jobs?status=Open');
+      const res = await apiFetch('/api/jobs?status=Open');
       if (res.ok) {
         const data = await res.json();
         setJobs(data.jobs || []);
@@ -101,6 +103,7 @@ export default function App() {
   };
 
   const handleLogout = () => {
+    apiFetch('/api/auth/logout', { method: 'POST' }).catch(() => undefined);
     setCurrentUser(null);
     try {
       localStorage.removeItem('univa_user');
