@@ -502,6 +502,15 @@ app.get('/api/stats', staffAuth, async (req: any, res) => {
   }
 });
 
+// Convert upload/parser failures into JSON as well; API routes must never leak an HTML error page.
+app.use((error: any, req: any, res: any, next: any) => {
+  if (req.path.startsWith('/api/')) {
+    console.error('UNIVA request error:', error);
+    return res.status(error.status || 400).json({ error: error.message || 'The request could not be processed.' });
+  }
+  next(error);
+});
+
 // Unknown API routes return JSON (never the SPA HTML document).
 app.use('/api', (_req, res) => res.status(404).json({ error: 'API endpoint not found.' }));
 
