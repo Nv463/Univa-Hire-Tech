@@ -38,5 +38,6 @@
       "source": "/privacy",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "outputDirectory": "public"
 }
