@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/api';
 import {
   Mail,
   Phone,
@@ -70,7 +71,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     setSuccessMessage(null);
 
     try {
-      const res = await fetch('/api/enquiries', {
+      const res = await apiFetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
