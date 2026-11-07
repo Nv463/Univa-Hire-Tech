@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../lib/api';
 import {
   Users,
   Briefcase,
@@ -118,10 +119,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     setIsLoading(true);
     try {
       const [statsRes, jobsRes, appsRes, enqRes] = await Promise.all([
-        fetch('/api/stats'),
-        fetch('/api/jobs?status=all'),
-        fetch('/api/applications'),
-        fetch('/api/enquiries'),
+        apiFetch('/api/stats'),
+        apiFetch('/api/jobs?status=all'),
+        apiFetch('/api/applications'),
+        apiFetch('/api/enquiries'),
       ]);
 
       const [statsData, jobsData, appsData, enqData] = await Promise.all([
@@ -163,11 +164,37 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
       const data = await readApiJson(res);
 
-      onLogin(data.user);
+      onLogin({ ...data.user, access_token: data.access_token, refresh_token: data.refresh_token });
     } catch (err: any) {
       setLoginError(err.message);
     } finally {
       setIsLoggingIn(false);
+    }
+  };
+
+
+  const downloadProtectedFile = async (url: string, filename: string, openInNewTab = false) => {
+    try {
+      const response = await apiFetch(url);
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || 'Unable to download this file.');
+      }
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      if (openInNewTab) {
+        window.open(objectUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        const link = document.createElement('a');
+        link.href = objectUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
+    } catch (error: any) {
+      setLoginError(error.message || 'Unable to download this file.');
     }
   };
 
@@ -248,13 +275,13 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     try {
       let res;
       if (editingJob) {
-        res = await fetch(`/api/jobs/${editingJob.id}`, {
+        res = await apiFetch(`/api/jobs/${editingJob.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
       } else {
-        res = await fetch('/api/jobs', {
+        res = await apiFetch('/api/jobs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -279,7 +306,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const handleToggleJobStatus = async (job: Job) => {
     const nextStatus = job.status === 'Open' ? 'Closed' : 'Open';
     try {
-      await fetch(`/api/jobs/${job.id}`, {
+      await apiFetch(`/api/jobs/${job.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),
@@ -296,7 +323,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
       return;
     }
     try {
-      await fetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
+      await apiFetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
       fetchData();
     } catch (err) {
       console.error(err);
@@ -306,7 +333,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   // Update Applicant Status
   const handleUpdateApplicantStatus = async (appId: string, newStatus: ApplicationStatus) => {
     try {
-      const res = await fetch(`/api/applications/${appId}/status`, {
+      const res = await apiFetch(`/api/applications/${appId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
@@ -334,7 +361,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
     setIsAddingNote(true);
     try {
-      const res = await fetch(`/api/applications/${selectedApplicant.id}/notes`, {
+      const res = await apiFetch(`/api/applications/${selectedApplicant.id}/notes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -363,7 +390,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   // Update Enquiry Status
   const handleUpdateEnquiryStatus = async (enqId: string, status: any) => {
     try {
-      await fetch(`/api/enquiries/${enqId}/status`, {
+      await apiFetch(`/api/enquiries/${enqId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),
@@ -799,23 +826,23 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
             {/* Export Actions */}
             <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-              <a
-                href={`/api/applications/export/csv?job_id=${applicantJobFilter}`}
-                download="UNIVA_Applicants.csv"
+              <button
+                type="button"
+                onClick={() => downloadProtectedFile('/api/applications/export/csv?job_id=' + applicantJobFilter, 'UNIVA_Applicants.csv')}
                 className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-[#1B1A4E] text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Export CSV</span>
-              </a>
+              </button>
 
-              <a
-                href={`/api/applications/export/resumes-zip?job_id=${applicantJobFilter}`}
-                download="UNIVA_Resumes.zip"
+              <button
+                type="button"
+                onClick={() => downloadProtectedFile('/api/applications/export/resumes-zip?job_id=' + applicantJobFilter, 'UNIVA_Resumes.zip')}
                 className="px-3.5 py-1.5 bg-[#1B1A4E] hover:bg-[#3B2FBF] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <FileArchive className="w-3.5 h-3.5" />
                 <span>Download Resumes (ZIP)</span>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -915,15 +942,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                         {/* Action buttons */}
                         <td className="py-3.5 px-4 text-right">
                           <div className="flex items-center justify-end gap-2">
-                            <a
-                              href={`/api/applications/${app.id}/resume`}
-                              target="_blank"
-                              rel="noreferrer"
+                            <button
+                              type="button"
+                              onClick={() => downloadProtectedFile('/api/applications/' + app.id + '/resume', app.resume_filename || 'resume.pdf', true)}
                               title="Download / View PDF Resume"
                               className="p-1.5 text-[#3B2FBF] hover:bg-indigo-50 rounded"
                             >
                               <FileText className="w-4 h-4" />
-                            </a>
+                            </button>
                             <button
                               onClick={() => setSelectedApplicant(app)}
                               className="px-2.5 py-1 text-xs font-bold text-[#1B1A4E] hover:bg-slate-100 rounded border border-slate-200"
@@ -1022,10 +1048,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </div>
               </div>
 
-              <a
-                href={`/api/applications/${selectedApplicant.id}/resume`}
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
+                onClick={() => downloadProtectedFile('/api/applications/' + selectedApplicant.id + '/resume', selectedApplicant.resume_filename || 'resume.pdf', true)}
                 className="px-3.5 py-1.5 bg-[#3B2FBF] hover:bg-[#3227a8] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <span>View PDF</span>
