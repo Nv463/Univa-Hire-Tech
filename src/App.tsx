@@ -37,7 +37,7 @@ export default function App() {
       if (path === 'admin' || hash === 'admin') {
         window.history.replaceState(null, '', '/');
         setActivePage('home');
-      } else if (path === 'recruiter') {
+      } else if (path === 'recruiter' || path === 'recruiter/reset-password') {
         setActivePage('admin');
       } else if (path === 'jobs' || hash === 'jobs') {
         setActivePage('jobs');

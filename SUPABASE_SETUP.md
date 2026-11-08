@@ -33,3 +33,8 @@ Do not enable public sign-ups. Do not put a Supabase secret/service-role key in 
 ## Storage
 
 Candidate CVs are stored in the private `candidate-resumes` bucket. PDF-only, 5 MB maximum. Anonymous users may upload only; only approved UNIVA staff can read files.
+
+
+## Password recovery links
+
+In Supabase Dashboard, open **Authentication → URL Configuration**. Set the Site URL to `https://univa-hire-tech.vercel.app` and add `https://univa-hire-tech.vercel.app/recruiter/reset-password` to the Redirect URLs list. The staff portal sends recovery links to this production URL. Keep `http://localhost:3000/recruiter/reset-password` only if you also need local development.

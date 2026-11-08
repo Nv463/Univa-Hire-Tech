@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../lib/api';
+import { supabase } from '../lib/supabase';
 import {
   Users,
   Briefcase,
@@ -70,6 +71,13 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isPasswordRecovery, setIsPasswordRecovery] = useState(() => window.location.pathname === '/recruiter/reset-password');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [passwordResetError, setPasswordResetError] = useState<string | null>(null);
+  const [passwordResetMessage, setPasswordResetMessage] = useState<string | null>(null);
+  const [isRequestingPasswordReset, setIsRequestingPasswordReset] = useState(false);
+  const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
 
   // Active Tab
   const [activeTab, setActiveTab] = useState<'dashboard' | 'jobs' | 'applicants' | 'enquiries'>('dashboard');
@@ -144,6 +152,26 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   };
 
   useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        setIsPasswordRecovery(true);
+        setPasswordResetError(null);
+      }
+    });
+
+    if (window.location.pathname === '/recruiter/reset-password') {
+      supabase.auth.getSession().then(({ data, error }) => {
+        if (error || !data.session) {
+          setIsPasswordRecovery(false);
+          setPasswordResetError('This reset link is invalid or expired. Request a new one from the staff sign-in page.');
+        }
+      });
+    }
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       fetchData();
     }
@@ -172,6 +200,60 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     }
   };
 
+
+  const handlePasswordResetRequest = async () => {
+    const email = (currentUser?.email || loginEmail).trim().toLowerCase();
+    setPasswordResetError(null);
+    setPasswordResetMessage(null);
+    if (!email) {
+      setPasswordResetError('Enter your corporate email to receive a password reset link.');
+      return;
+    }
+
+    setIsRequestingPasswordReset(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://univa-hire-tech.vercel.app/recruiter/reset-password',
+      });
+      if (error) throw error;
+      setPasswordResetMessage('If this account exists, a password reset link has been sent to its email address.');
+    } catch (error: any) {
+      setPasswordResetError(error.message || 'Unable to send a password reset link.');
+    } finally {
+      setIsRequestingPasswordReset(false);
+    }
+  };
+
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordResetError(null);
+    setPasswordResetMessage(null);
+    if (newPassword.length < 8) {
+      setPasswordResetError('Use a password with at least 8 characters.');
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      setPasswordResetError('The passwords do not match.');
+      return;
+    }
+
+    setIsUpdatingPassword(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      await supabase.auth.signOut();
+      setIsPasswordRecovery(false);
+      setNewPassword('');
+      setConfirmNewPassword('');
+      window.history.replaceState(null, '', '/recruiter');
+      onLogout();
+      setPasswordResetMessage('Password updated. Sign in with your new password.');
+    } catch (error: any) {
+      setPasswordResetError(error.message || 'Unable to update the password. Request a fresh reset link and try again.');
+    } finally {
+      setIsUpdatingPassword(false);
+    }
+  };
 
   const downloadProtectedFile = async (url: string, filename: string, openInNewTab = false) => {
     try {
@@ -421,6 +503,73 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   });
 
   // If not logged in, show login card
+  if (isPasswordRecovery) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
+        <div className="bg-white rounded-2xl border border-[#DCDDEE] shadow-xl max-w-md w-full p-8 space-y-6">
+          <div className="text-center space-y-2">
+            <div className="w-12 h-12 rounded-xl bg-[#1B1A4E] text-[#0E9F80] flex items-center justify-center mx-auto shadow-sm">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-[#1B1A4E]">Update Staff Password</h2>
+            <p className="text-xs text-[#55587A]">Choose a new password for your UNIVA staff account.</p>
+          </div>
+
+          {passwordResetError && (
+            <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700" role="alert">
+              {passwordResetError}
+            </div>
+          )}
+
+          <form onSubmit={handlePasswordUpdate} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-[#1B1A4E] mb-1">New Password</label>
+              <input
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-[#DCDDEE] rounded-lg text-xs text-[#1B1A4E] focus:outline-none focus:border-[#3B2FBF] focus:bg-white"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-[#1B1A4E] mb-1">Confirm New Password</label>
+              <input
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-[#DCDDEE] rounded-lg text-xs text-[#1B1A4E] focus:outline-none focus:border-[#3B2FBF] focus:bg-white"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isUpdatingPassword}
+              className="w-full py-2.5 bg-[#3B2FBF] hover:bg-[#3227a8] disabled:opacity-60 text-white text-xs font-bold rounded-lg shadow transition-all"
+            >
+              {isUpdatingPassword ? 'Updating Password…' : 'Update Password'}
+            </button>
+          </form>
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsPasswordRecovery(false);
+              window.history.replaceState(null, '', '/recruiter');
+            }}
+            className="w-full text-xs text-[#55587A] hover:underline"
+          >
+            Return to staff sign-in
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!currentUser) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
@@ -442,6 +591,13 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
               <span>{loginError}</span>
             </div>
+          )}
+
+          {passwordResetError && (
+            <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700" role="alert">{passwordResetError}</div>
+          )}
+          {passwordResetMessage && (
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800" role="status">{passwordResetMessage}</div>
           )}
 
           <form onSubmit={handleLoginSubmit} className="space-y-4">
@@ -475,6 +631,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               />
             </div>
 
+            <button
+              type="button"
+              onClick={handlePasswordResetRequest}
+              disabled={isRequestingPasswordReset}
+              className="w-full text-right text-xs font-semibold text-[#3B2FBF] hover:underline disabled:opacity-60"
+            >
+              {isRequestingPasswordReset ? 'Sending reset link…' : 'Forgot or update password?'}
+            </button>
             <button
               type="submit"
               disabled={isLoggingIn}
@@ -540,6 +704,16 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
             <Plus className="w-4 h-4" />
             <span>Post New Job</span>
           </button>
+          {currentUser.role === 'Admin' && (
+            <button
+              onClick={handlePasswordResetRequest}
+              disabled={isRequestingPasswordReset}
+              className="px-3.5 py-2 text-xs font-semibold text-[#3B2FBF] hover:bg-indigo-50 rounded-lg transition-colors flex items-center gap-1.5 border border-indigo-200 disabled:opacity-60"
+            >
+              <Lock className="w-4 h-4" />
+              <span>{isRequestingPasswordReset ? 'Sending Link…' : 'Change Password'}</span>
+            </button>
+          )}
           <button
             onClick={onLogout}
             className="px-3.5 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg transition-colors flex items-center gap-1.5 border border-rose-200"
@@ -549,6 +723,13 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
           </button>
         </div>
       </div>
+
+      {passwordResetError && (
+        <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700" role="alert">{passwordResetError}</div>
+      )}
+      {passwordResetMessage && (
+        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800" role="status">{passwordResetMessage}</div>
+      )}
 
       {/* Admin Navigation Tabs */}
       <div className="flex items-center gap-2 border-b border-[#DCDDEE] overflow-x-auto pb-2">

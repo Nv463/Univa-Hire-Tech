@@ -18,6 +18,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/recruiter/reset-password",
+      "destination": "/index.html"
+    },
+    {
       "source": "/jobs",
       "destination": "/index.html"
     },
