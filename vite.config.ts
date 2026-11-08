@@ -8,8 +8,8 @@ export default defineConfig(() => {
     plugins: [react(), tailwindcss()],
     publicDir: false,
     build: {
-      // Vercel serves files from /public via its CDN while server.ts handles API routes.
-      outDir: 'public',
+      // Vercel serves the generated static SPA from dist; API routes run as serverless functions.
+      outDir: 'dist',
       emptyOutDir: false,
     },
     resolve: {
