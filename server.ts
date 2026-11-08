@@ -514,18 +514,5 @@ app.use((error: any, req: any, res: any, next: any) => {
 // Unknown API routes return JSON (never the SPA HTML document).
 app.use('/api', (_req, res) => res.status(404).json({ error: 'API endpoint not found.' }));
 
-async function startServer() {
-  const { createServer: createViteServer } = await import('vite');
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: 'spa',
-  });
-  app.use(vite.middlewares);
-  app.listen(PORT, () => console.log('UNIVA HIRE TECH server listening on port ' + PORT));
-}
-
-if (!process.env.VERCEL) {
-  startServer();
-}
 
 export default app;
