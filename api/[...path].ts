@@ -1,7 +1,6 @@
-import app from '../server';
+import app from '../server.mjs';
 
-// Vercel Node.js functions can invoke an Express application directly.
-// Disable the platform body parser so Express/multer can read JSON and PDF streams.
+// Let Express/multer consume JSON and multipart PDF request streams.
 export const config = {
   api: {
     bodyParser: false,
