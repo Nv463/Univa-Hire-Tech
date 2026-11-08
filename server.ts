@@ -401,32 +401,6 @@ app.post('/api/applications/:id/notes', staffAuth, async (req: any, res) => {
   }
 });
 
-app.delete('/api/applications/:id/notes/:noteId', staffAuth, requireAdmin, async (req: any, res) => {
-  try {
-    const { data: row, error } = await req.supabase
-      .from('applications')
-      .select('data')
-      .eq('id', req.params.id)
-      .maybeSingle();
-    if (error) throw error;
-    if (!row) return res.status(404).json({ error: 'Application not found.' });
-
-    const notes = Array.isArray(row.data?.notes) ? row.data.notes : [];
-    const updatedNotes = notes.filter((note: any) => note.id !== req.params.noteId);
-    if (updatedNotes.length === notes.length) return res.status(404).json({ error: 'Recruiter note not found.' });
-
-    const { error: updateError } = await req.supabase
-      .from('applications')
-      .update({ data: { ...row.data, notes: updatedNotes } })
-      .eq('id', req.params.id);
-    if (updateError) throw updateError;
-
-    return res.json({ message: 'Recruiter note deleted.' });
-  } catch (error) {
-    return sendError(res, error);
-  }
-});
-
 app.get('/api/applications/:id/resume', staffAuth, async (req: any, res) => {
   try {
     const { data: row, error } = await req.supabase.from('applications').select('resume_path,data').eq('id', req.params.id).single();

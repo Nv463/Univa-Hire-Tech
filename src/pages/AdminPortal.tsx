@@ -37,7 +37,6 @@ import {
   DashboardStats,
   ApplicationStatus,
   JobStatus,
-  RecruiterNote,
 } from '../types';
 
 
@@ -482,28 +481,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
       if (selectedApplicant?.id === applicant.id) setSelectedApplicant(null);
     } catch (error: any) {
       window.alert(error.message || 'Could not delete this candidate.');
-    } finally {
-      setIsDeletingRecord(null);
-    }
-  };
-
-  // Delete a recruiter note (Admin only).
-  const handleDeleteNote = async (note: RecruiterNote) => {
-    if (currentUser?.role !== 'Admin' || !selectedApplicant) return;
-    if (!window.confirm('Permanently delete this internal recruiter note?')) return;
-
-    const applicantId = selectedApplicant.id;
-    setIsDeletingRecord(`note:${note.id}`);
-    try {
-      await readApiJson(await apiFetch(`/api/applications/${applicantId}/notes/${note.id}`, { method: 'DELETE' }));
-      const updatedApplicant = {
-        ...selectedApplicant,
-        notes: (selectedApplicant.notes || []).filter((item) => item.id !== note.id),
-      };
-      setSelectedApplicant(updatedApplicant);
-      setApplications((prev) => prev.map((item) => item.id === applicantId ? updatedApplicant : item));
-    } catch (error: any) {
-      window.alert(error.message || 'Could not delete this note.');
     } finally {
       setIsDeletingRecord(null);
     }
@@ -1384,18 +1361,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                         <span className="font-bold text-[#1B1A4E]">{note.author}</span>
                         <div className="flex items-center gap-2">
                           <span>{new Date(note.timestamp).toLocaleDateString()}</span>
-                          {currentUser?.role === 'Admin' && (
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteNote(note)}
-                              disabled={isDeletingRecord === `note:${note.id}`}
-                              aria-label="Delete internal note"
-                              title="Delete note"
-                              className="p-1 text-rose-600 hover:bg-rose-50 disabled:opacity-50 rounded"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          )}
                         </div>
                       </div>
                       <p className="text-[#1B1A4E] leading-relaxed">{note.text}</p>
