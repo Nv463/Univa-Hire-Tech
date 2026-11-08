@@ -194,15 +194,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] text-slate-500">Internal System:</span>
-            <button
-              onClick={() => handleNav('admin')}
-              className="text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded transition-colors"
-            >
-              Staff Portal (/admin)
-            </button>
-          </div>
         </div>
       </div>
     </footer>
