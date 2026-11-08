@@ -1,5 +1,13 @@
 import app from '../server';
 
-// Vercel routes /api/* requests through this catch-all function.
-// The Express app keeps its existing /api/auth, /api/jobs, and other routes.
-export default app;
+// Let Express parse JSON and multipart uploads itself. Vercel's default
+// body parser consumes the request stream before multer can read PDF uploads.
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default function handler(req: any, res: any) {
+  return app(req, res);
+}
