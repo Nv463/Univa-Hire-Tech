@@ -1,13 +1,11 @@
 import app from '../server';
 
-// Let Express parse JSON and multipart uploads itself. Vercel's default
-// body parser consumes the request stream before multer can read PDF uploads.
+// Vercel Node.js functions can invoke an Express application directly.
+// Disable the platform body parser so Express/multer can read JSON and PDF streams.
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-export default function handler(req: any, res: any) {
-  return app(req, res);
-}
+export default app;
