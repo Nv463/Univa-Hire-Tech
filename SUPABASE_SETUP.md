@@ -16,7 +16,7 @@ set role = 'Admin', updated_at = now()
 where lower(email) = lower('YOUR_ADMIN_EMAIL');
 ```
 
-4. Confirm one row was updated. The new account can now sign in at `https://univa-hire-tech.vercel.app/admin`.
+4. Confirm one row was updated. The new account can now sign in at `https://univa-hire-tech.vercel.app/recruiter`.
 
 ## Add recruiters
 

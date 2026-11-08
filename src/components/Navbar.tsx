@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { UnivaLogo } from './UnivaLogo';
-import { Menu, X, ArrowUpRight, UserCheck } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
   onNavigate: (page: string) => void;
-  isAdminLoggedIn?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activePage,
   onNavigate,
-  isAdminLoggedIn = false,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -42,14 +40,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span aria-hidden="true">·</span>
           <span>Bengaluru · Mumbai · Gurugram · Pune · Hyderabad · Chennai</span>
           <span aria-hidden="true">·</span>
-          <button
-            onClick={() => handleNavClick('admin')}
-            className="text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer font-medium"
-          >
-            <UserCheck className="w-3 h-3 text-[#0E9F80]" />
-            <span>Staff Portal</span>
-            {isAdminLoggedIn && <span className="w-1.5 h-1.5 rounded-full bg-[#0E9F80]"></span>}
-          </button>
         </div>
       </div>
 
@@ -143,13 +133,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="w-full py-2.5 text-center text-xs font-bold text-white bg-[#3B2FBF] rounded-lg shadow"
             >
               Hire Talent / Submit Enquiry
-            </button>
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="w-full py-2 text-center text-xs font-medium text-[#55587A] hover:text-[#1B1A4E] bg-slate-50 rounded-lg flex items-center justify-center gap-1.5"
-            >
-              <UserCheck className="w-3.5 h-3.5 text-[#0E9F80]" />
-              <span>Internal Staff Portal (/admin)</span>
             </button>
           </div>
         </div>

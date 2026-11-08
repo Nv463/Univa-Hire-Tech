@@ -28,13 +28,16 @@ export default function App() {
     }
   });
 
-  // Handle browser path or hash changes (e.g. /admin or #admin)
+  // Keep the internal staff portal available only at /recruiter
   useEffect(() => {
     const handleUrlSync = () => {
       const path = window.location.pathname.replace(/^\//, '');
       const hash = window.location.hash.replace(/^#/, '');
 
       if (path === 'admin' || hash === 'admin') {
+        window.history.replaceState(null, '', '/');
+        setActivePage('home');
+      } else if (path === 'recruiter') {
         setActivePage('admin');
       } else if (path === 'jobs' || hash === 'jobs') {
         setActivePage('jobs');
@@ -118,7 +121,6 @@ export default function App() {
       <Navbar
         activePage={activePage}
         onNavigate={handleNavigate}
-        isAdminLoggedIn={Boolean(currentUser)}
       />
 
       {/* Main Page Content Body */}
