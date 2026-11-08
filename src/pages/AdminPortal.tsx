@@ -98,6 +98,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const [selectedApplicant, setSelectedApplicant] = useState<Application | null>(null);
   const [newNoteText, setNewNoteText] = useState('');
   const [isAddingNote, setIsAddingNote] = useState(false);
+  const [isDeletingRecord, setIsDeletingRecord] = useState<string | null>(null);
 
   // Job Modal (Create or Edit)
   const [isJobModalOpen, setIsJobModalOpen] = useState(false);
@@ -466,6 +467,61 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
       console.error(err);
     } finally {
       setIsAddingNote(false);
+    }
+  };
+
+  // Delete an applicant and their stored resume (Admin only).
+  const handleDeleteCandidate = async (applicant: Application) => {
+    if (currentUser?.role !== 'Admin') return;
+    if (!window.confirm(`Permanently delete ${applicant.full_name}'s application and attached resume?`)) return;
+
+    setIsDeletingRecord(`candidate:${applicant.id}`);
+    try {
+      await readApiJson(await apiFetch(`/api/applications/${applicant.id}`, { method: 'DELETE' }));
+      setApplications((prev) => prev.filter((item) => item.id !== applicant.id));
+      if (selectedApplicant?.id === applicant.id) setSelectedApplicant(null);
+    } catch (error: any) {
+      window.alert(error.message || 'Could not delete this candidate.');
+    } finally {
+      setIsDeletingRecord(null);
+    }
+  };
+
+  // Delete a recruiter note (Admin only).
+  const handleDeleteNote = async (note: RecruiterNote) => {
+    if (currentUser?.role !== 'Admin' || !selectedApplicant) return;
+    if (!window.confirm('Permanently delete this internal recruiter note?')) return;
+
+    const applicantId = selectedApplicant.id;
+    setIsDeletingRecord(`note:${note.id}`);
+    try {
+      await readApiJson(await apiFetch(`/api/applications/${applicantId}/notes/${note.id}`, { method: 'DELETE' }));
+      const updatedApplicant = {
+        ...selectedApplicant,
+        notes: (selectedApplicant.notes || []).filter((item) => item.id !== note.id),
+      };
+      setSelectedApplicant(updatedApplicant);
+      setApplications((prev) => prev.map((item) => item.id === applicantId ? updatedApplicant : item));
+    } catch (error: any) {
+      window.alert(error.message || 'Could not delete this note.');
+    } finally {
+      setIsDeletingRecord(null);
+    }
+  };
+
+  // Delete a client enquiry (Admin only).
+  const handleDeleteEnquiry = async (enquiry: ClientEnquiry) => {
+    if (currentUser?.role !== 'Admin') return;
+    if (!window.confirm(`Permanently delete the enquiry from ${enquiry.company}?`)) return;
+
+    setIsDeletingRecord(`enquiry:${enquiry.id}`);
+    try {
+      await readApiJson(await apiFetch(`/api/enquiries/${enquiry.id}`, { method: 'DELETE' }));
+      setEnquiries((prev) => prev.filter((item) => item.id !== enquiry.id));
+    } catch (error: any) {
+      window.alert(error.message || 'Could not delete this enquiry.');
+    } finally {
+      setIsDeletingRecord(null);
     }
   };
 
@@ -1171,12 +1227,26 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </p>
               </div>
 
-              <button
-                onClick={() => setSelectedApplicant(null)}
-                className="p-1.5 text-slate-400 hover:text-[#1B1A4E] rounded-lg"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              <div className="flex items-center gap-2">
+                {currentUser?.role === 'Admin' && (
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteCandidate(selectedApplicant)}
+                    disabled={isDeletingRecord === `candidate:${selectedApplicant.id}`}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-50 disabled:opacity-50 rounded-lg border border-rose-200"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    {isDeletingRecord === `candidate:${selectedApplicant.id}` ? 'Deleting...' : 'Delete candidate'}
+                  </button>
+                )}
+                <button
+                  onClick={() => setSelectedApplicant(null)}
+                  aria-label="Close candidate details"
+                  className="p-1.5 text-slate-400 hover:text-[#1B1A4E] rounded-lg"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
             </div>
 
             {/* Candidate Specs Grid */}
@@ -1312,7 +1382,21 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     >
                       <div className="flex items-center justify-between text-[11px] text-[#55587A]">
                         <span className="font-bold text-[#1B1A4E]">{note.author}</span>
-                        <span>{new Date(note.timestamp).toLocaleDateString()}</span>
+                        <div className="flex items-center gap-2">
+                          <span>{new Date(note.timestamp).toLocaleDateString()}</span>
+                          {currentUser?.role === 'Admin' && (
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteNote(note)}
+                              disabled={isDeletingRecord === `note:${note.id}`}
+                              aria-label="Delete internal note"
+                              title="Delete note"
+                              className="p-1 text-rose-600 hover:bg-rose-50 disabled:opacity-50 rounded"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
                       </div>
                       <p className="text-[#1B1A4E] leading-relaxed">{note.text}</p>
                     </div>
@@ -1725,6 +1809,17 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                       <option value="In Discussion">In Discussion</option>
                       <option value="Closed">Closed</option>
                     </select>
+                    {currentUser?.role === 'Admin' && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteEnquiry(enq)}
+                        disabled={isDeletingRecord === `enquiry:${enq.id}`}
+                        className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-50 disabled:opacity-50 rounded-lg border border-rose-200"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        {isDeletingRecord === `enquiry:${enq.id}` ? 'Deleting...' : 'Delete enquiry'}
+                      </button>
+                    )}
                   </div>
                 </div>
               ))
