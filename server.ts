@@ -156,6 +156,11 @@ app.post('/api/auth/logout', staffAuth, async (req: any, res) => {
   }
 });
 
+// Deployment health check exercises the same Express app used by every API route.
+app.get('/api/health', (_req, res) => {
+  res.status(200).json({ ok: true, service: 'univa-api' });
+});
+
 // Public visitors can see open jobs; staff can request all statuses.
 app.get('/api/jobs', async (req: any, res) => {
   try {
