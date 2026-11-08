@@ -1,5 +1,4 @@
-import app from '../server';
+import app from '../server.mjs';
 
-// Deliberately use the same backend module as the catch-all API function.
-// A standalone health handler could pass while the actual API module crashes.
+// Exercise the same bundled Express application used by production API routes.
 export default app;
