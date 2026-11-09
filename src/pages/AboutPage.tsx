@@ -1,4 +1,5 @@
 import React from 'react';
+import aboutImage from '../assets/images/service_executive_search_1793911534916.jpg';
 import {
   ShieldCheck,
   Target,
@@ -133,7 +134,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="lg:col-span-5">
             <div className="rounded-2xl overflow-hidden border border-[#DCDDEE] shadow-lg relative bg-white">
               <img
-                src="/src/assets/images/service_executive_search_1793911534916.jpg"
+                src={aboutImage}
                 alt="UNIVA Leadership Consultants"
                 className="w-full h-80 object-cover"
                 referrerPolicy="no-referrer"
