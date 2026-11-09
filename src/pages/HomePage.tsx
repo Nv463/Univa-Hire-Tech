@@ -121,9 +121,13 @@ export const HomePage: React.FC<HomePageProps> = ({
     { name: 'Manufacturing', desc: 'Plant, production, quality and maintenance', icon: '⚙️' },
     { name: 'Construction & Infra', desc: 'Site, civil, project and skilled trades', icon: '🏗️' },
     { name: 'Banking & Financial (BFSI)', desc: 'Risk, compliance, sales and back office', icon: '🏛️' },
-    { name: 'Healthcare & Pharma', desc: 'Clinical support, admin and hospital facilities', icon: '🏥' },
+    { name: 'Pharmaceuticals & Healthcare', desc: 'Pharmaceuticals, clinical support, hospital administration and facilities', icon: '🏥' },
     { name: 'Retail & E-commerce', desc: 'Store, fulfillment and customer service operations', icon: '🛍️' },
     { name: 'Logistics & Supply Chain', desc: 'Warehouse, transport and distribution hubs', icon: '🚚' },
+    { name: 'FMCG & Consumer Goods', desc: 'Consumer brands, product quality and distribution operations', icon: '🛒' },
+    { name: 'Telecom', desc: 'Telecom networks, infrastructure and customer operations', icon: '📡' },
+    { name: 'Food & Beverage', desc: 'Food production, quality, packaging and supply chains', icon: '🥗' },
+    { name: 'Oil, Gas & Energy', desc: 'Energy production, infrastructure, maintenance and safety', icon: '⚡' },
     { name: 'Corporate & Professional', desc: 'Corporate, HR, finance and support leadership', icon: '🏢' },
   ];
 
