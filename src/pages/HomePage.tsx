@@ -3,6 +3,11 @@ import heroImage from '../assets/images/hero_executive_corporate_1793911532663.j
 import staffingImage from '../assets/images/service_contract_staffing_1793911533906.jpg';
 import executiveSearchImage from '../assets/images/service_executive_search_1793911534916.jpg';
 import workplaceAuditImage from '../assets/images/workplace_audit_safety_1793911535061.jpg';
+
+const corporateEventImage = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=85';
+const trainingImage = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=85';
+const safetyTrainingImage = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=85';
+const onboardingImage = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85';
 import {
   ArrowRight,
   Briefcase,
@@ -79,7 +84,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       desc: 'Planning, coordination and on-ground execution for conferences, seminars, employee engagement activities, and annual celebrations.',
       icon: Calendar,
       badge: 'Engagement',
-      image: heroImage,
+      image: corporateEventImage,
     },
     {
       title: 'Audit Services',
@@ -93,21 +98,21 @@ export const HomePage: React.FC<HomePageProps> = ({
       desc: 'Technical skills development, communication and soft-skills, employee development journeys, professional corporate programs, and safety awareness.',
       icon: GraduationCap,
       badge: 'Capability',
-      image: staffingImage,
+      image: trainingImage,
     },
     {
       title: 'Workplace Safety Training & Support',
       desc: 'Safety awareness programs, hazard identification & risk assessment (HIRA), instructor-led training, and site safety inspections.',
       icon: AlertTriangle,
       badge: 'Safety First',
-      image: workplaceAuditImage,
+      image: safetyTrainingImage,
     },
     {
       title: 'Onboarding & HR Support',
       desc: 'Joining formalities, documentation verification, HR records management, attendance & leave administration, and employee grievance support.',
       icon: UserCheck,
       badge: 'Lifecycle',
-      image: executiveSearchImage,
+      image: onboardingImage,
     },
   ];
 
