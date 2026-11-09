@@ -79,7 +79,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       desc: 'Planning, coordination and on-ground execution for conferences, seminars, employee engagement activities, and annual celebrations.',
       icon: Calendar,
       badge: 'Engagement',
-      image: null,
+      image: heroImage,
     },
     {
       title: 'Audit Services',
@@ -93,21 +93,21 @@ export const HomePage: React.FC<HomePageProps> = ({
       desc: 'Technical skills development, communication and soft-skills, employee development journeys, professional corporate programs, and safety awareness.',
       icon: GraduationCap,
       badge: 'Capability',
-      image: null,
+      image: staffingImage,
     },
     {
       title: 'Workplace Safety Training & Support',
       desc: 'Safety awareness programs, hazard identification & risk assessment (HIRA), instructor-led training, and site safety inspections.',
       icon: AlertTriangle,
       badge: 'Safety First',
-      image: null,
+      image: workplaceAuditImage,
     },
     {
       title: 'Onboarding & HR Support',
       desc: 'Joining formalities, documentation verification, HR records management, attendance & leave administration, and employee grievance support.',
       icon: UserCheck,
       badge: 'Lifecycle',
-      image: null,
+      image: executiveSearchImage,
     },
   ];
 
