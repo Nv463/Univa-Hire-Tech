@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnivaLogo } from './UnivaLogo';
-import { Download, Mail, Phone, MapPin, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, ExternalLink, CheckCircle2, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -194,6 +194,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </button>
           </div>
 
+          <nav aria-label="Social media" className="flex items-center gap-3">
+            <a href="https://www.instagram.com/univahtech/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61596353462036&amp;sk=directory_education" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a href="https://www.linkedin.com/in/univa-hire-tech-05049b44a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
+              <Linkedin className="h-4 w-4" />
+            </a>
+          </nav>
         </div>
       </div>
     </footer>
