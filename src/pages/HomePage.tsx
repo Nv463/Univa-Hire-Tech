@@ -1,4 +1,8 @@
 import React from 'react';
+import heroImage from '../assets/images/hero_executive_corporate_1793911532663.jpg';
+import staffingImage from '../assets/images/service_contract_staffing_1793911533906.jpg';
+import executiveSearchImage from '../assets/images/service_executive_search_1793911534916.jpg';
+import workplaceAuditImage from '../assets/images/workplace_audit_safety_1793911535061.jpg';
 import {
   ArrowRight,
   Briefcase,
@@ -61,42 +65,49 @@ export const HomePage: React.FC<HomePageProps> = ({
       desc: "Executive-to-Senior-level contract staffing on UNIVA's payroll, payroll and statutory administration, scale up or down without permanent headcount.",
       icon: Users,
       badge: 'Core Solution',
+      image: staffingImage,
     },
     {
       title: 'Recruitment Services',
       desc: 'Permanent Recruitment, Executive Search, Requirement Fulfilment, Candidate Screening, and Recruitment Process Outsourcing (RPO).',
       icon: Briefcase,
       badge: 'Executive Search',
+      image: executiveSearchImage,
     },
     {
       title: 'Corporate Event Management',
       desc: 'Planning, coordination and on-ground execution for conferences, seminars, employee engagement activities, and annual celebrations.',
       icon: Calendar,
       badge: 'Engagement',
+      image: null,
     },
     {
       title: 'Audit Services',
       desc: 'Workplace safety compliance audits, HR process & documentation audits, ISO audit support, operational risk assessment, and gap analyses.',
       icon: FileCheck2,
       badge: 'Governance',
+      image: workplaceAuditImage,
     },
     {
       title: 'Training & Skill Development',
       desc: 'Technical skills development, communication and soft-skills, employee development journeys, professional corporate programs, and safety awareness.',
       icon: GraduationCap,
       badge: 'Capability',
+      image: null,
     },
     {
       title: 'Workplace Safety Training & Support',
       desc: 'Safety awareness programs, hazard identification & risk assessment (HIRA), instructor-led training, and site safety inspections.',
       icon: AlertTriangle,
       badge: 'Safety First',
+      image: null,
     },
     {
       title: 'Onboarding & HR Support',
       desc: 'Joining formalities, documentation verification, HR records management, attendance & leave administration, and employee grievance support.',
       icon: UserCheck,
       badge: 'Lifecycle',
+      image: null,
     },
   ];
 
@@ -136,75 +147,43 @@ export const HomePage: React.FC<HomePageProps> = ({
   ];
 
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-24 sm:space-y-28 pb-24">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[#1B1A4E] text-white py-20 lg:py-28">
-        {/* Background Image with Measured Contrast Scrim */}
-        <div className="absolute inset-0 z-0 opacity-25">
-          <img
-            src="/src/assets/images/hero_executive_corporate_1793911532663.jpg"
-            alt="UNIVA HIRE TECH Corporate Boardroom"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1B1A4E] via-[#1B1A4E]/90 to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-6">
-            {/* Editorial Category Kicker (No pill badge) */}
-            <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
-              Third-Party Staffing · Recruitment · Workforce Management
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-              The Right Talent,{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E9F80] to-teal-200">
-                On Our Payroll,
-              </span>{' '}
-              For Your Growth.
+      <section className="relative isolate overflow-hidden bg-[#07162C] text-white py-16 sm:py-20 lg:py-24">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_20%,rgba(14,159,128,0.22),transparent_36%),radial-gradient(ellipse_at_10%_90%,rgba(59,47,191,0.32),transparent_44%)]" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.04fr_0.96fr] gap-12 lg:gap-16 items-center">
+          <div className="max-w-2xl space-y-6">
+            <div className="flex items-center gap-3 text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#C8B37A] font-bold"><span className="h-px w-8 bg-[#C8B37A]" />Third-party staffing · Recruitment · Workforce management</div>
+            <h1 className="text-4xl sm:text-5xl lg:text-[4.25rem] font-semibold tracking-[-0.045em] text-white leading-[1.04]">
+              The right people,
+              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#B8E9DF] via-[#E8E0C7] to-[#C8B37A]">behind every</span>
+              <span className="block">business milestone.</span>
             </h1>
-
-            <p className="text-lg sm:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl">
-              Your Trusted Strategic Manpower Partner. Delivering integrated manpower, executive recruitment, and compliance-driven workforce solutions across corporate India.
+            <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed max-w-xl">
+              Your strategic manpower partner for executive recruitment, flexible staffing, and compliance-led workforce solutions across India.
             </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-              <button
-                onClick={() => onNavigate('jobs')}
-                className="px-7 py-3.5 bg-white text-[#1B1A4E] hover:bg-slate-100 font-bold text-sm rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Briefcase className="w-4 h-4 text-[#3B2FBF]" />
-                <span>Browse Open Jobs</span>
-              </button>
-
-              <button
-                onClick={() => onNavigate('contact')}
-                className="px-7 py-3.5 bg-[#3B2FBF] hover:bg-[#3227a8] text-white font-bold text-sm rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-indigo-400/30"
-              >
-                <span>Hire Talent / Request Proposal</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              <button onClick={() => onNavigate('contact')} className="px-6 py-3.5 bg-[#C8B37A] text-[#101A2B] hover:bg-[#DDCCA0] font-bold text-sm rounded-xl shadow-lg shadow-black/20 transition-all flex items-center justify-center gap-2 cursor-pointer"><span>Discuss your hiring needs</span><ArrowRight className="w-4 h-4" /></button>
+              <button onClick={() => onNavigate('jobs')} className="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/15"><Briefcase className="w-4 h-4 text-[#B8E9DF]" /><span>Explore open roles</span></button>
             </div>
-
-            {/* Quick trust metrics */}
-            <div className="pt-6 border-t border-slate-700/60 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-slate-300">
-              <div>
-                <span className="block text-xl font-bold text-white tabular-nums">100%</span>
-                <span className="text-slate-400">Statutory Compliant</span>
-              </div>
-              <div>
-                <span className="block text-xl font-bold text-white tabular-nums">10-Step</span>
-                <span className="text-slate-400">Rigorous Delivery Model</span>
-              </div>
-              <div>
-                <span className="block text-xl font-bold text-white tabular-nums">7 Services</span>
-                <span className="text-slate-400">Under One Roof</span>
-              </div>
-              <div>
-                <span className="block text-xl font-bold text-white tabular-nums">Pan-India</span>
-                <span className="text-slate-400">Metropolitan Presence</span>
-              </div>
+            <div className="pt-6 border-t border-white/15 grid grid-cols-2 gap-x-6 gap-y-5 text-xs text-slate-300">
+              <div><span className="block text-xl sm:text-2xl font-semibold text-white tabular-nums">10-step</span><span className="text-slate-400">structured delivery model</span></div>
+              <div><span className="block text-xl sm:text-2xl font-semibold text-white tabular-nums">7 services</span><span className="text-slate-400">under one partner</span></div>
+              <div><span className="block text-xl sm:text-2xl font-semibold text-white">Pan-India</span><span className="text-slate-400">metropolitan sourcing</span></div>
+              <div><span className="block text-xl sm:text-2xl font-semibold text-white">People-first</span><span className="text-slate-400">with compliance built in</span></div>
+            </div>
+          </div>
+          <div className="relative max-w-2xl w-full mx-auto lg:mx-0 lg:ml-auto">
+            <div aria-hidden="true" className="absolute -inset-3 sm:-inset-4 rounded-[2rem] border border-[#C8B37A]/30 rotate-2" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.7rem] border border-white/15 bg-[#142942] shadow-2xl shadow-black/40">
+              <img src={heroImage} alt="UNIVA HIRE TECH team collaborating in a corporate setting" className="w-full h-full object-cover" fetchPriority="high" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07162C]/80 via-[#07162C]/10 to-[#07162C]/5" />
+              <div className="absolute top-5 left-5 flex items-center gap-2 rounded-full border border-white/20 bg-[#07162C]/45 px-3 py-2 backdrop-blur-md"><span className="h-1.5 w-1.5 rounded-full bg-[#B8E9DF]" /><span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">Talent. Trust. Transformation.</span></div>
+              <div className="absolute bottom-5 right-5 text-right"><span className="block text-[10px] uppercase tracking-[0.2em] text-[#E8E0C7]">Built around</span><span className="text-lg sm:text-xl font-semibold text-white">your next chapter</span></div>
+            </div>
+            <div className="absolute -bottom-7 left-3 sm:left-8 flex items-center gap-3 rounded-2xl border border-[#E8E0C7]/70 bg-[#FCFBF7] px-4 py-3 shadow-xl shadow-black/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0E9F80]/10 text-[#0E7664]"><ShieldCheck className="h-5 w-5" /></div>
+              <div><span className="block text-xs font-bold text-[#101A2B]">Compliance, considered.</span><span className="block text-[10px] text-slate-500">Clear processes from day one</span></div>
             </div>
           </div>
         </div>
@@ -212,7 +191,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* Strip of 4 Key Points */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
-        <div className="bg-white rounded-xl shadow-md border border-[#DCDDEE] p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-[#FCFBF7] rounded-2xl shadow-xl shadow-[#101A2B]/10 border border-[#E8E0C7] p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {trustPoints.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -264,40 +243,30 @@ export const HomePage: React.FC<HomePageProps> = ({
           {services.map((srv) => {
             const Icon = srv.icon;
             return (
-              <div
-                key={srv.title}
-                onClick={() => onNavigate('services')}
-                className="bg-white rounded-xl border border-[#DCDDEE] p-6 hover:shadow-md hover:border-[#0E9F80]/60 transition-all flex flex-col justify-between cursor-pointer group"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-[#3B2FBF] tracking-wider">
-                    </span>
-                    <span className="text-[11px] font-semibold text-[#0E9F80] bg-teal-50 px-2 py-0.5 rounded">
-                      {srv.badge}
-                    </span>
+              <button type="button" key={srv.title} onClick={() => onNavigate('services')} className="group flex h-full min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-[#E4E4E8] bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#C8B37A]/70 hover:shadow-xl hover:shadow-[#101A2B]/10">
+                {srv.image ? (
+                  <div className="relative h-48 w-full overflow-hidden bg-[#142942]">
+                    <img src={srv.image} alt={srv.title + ' at UNIVA HIRE TECH'} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#07162C]/75 via-[#07162C]/5 to-transparent" />
+                    <span className="absolute bottom-4 left-5 rounded-full border border-white/20 bg-[#07162C]/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md">{srv.badge}</span>
                   </div>
-                  <div className="w-10 h-10 rounded-lg bg-[#3B2FBF]/10 group-hover:bg-[#0E9F80] group-hover:text-white text-[#3B2FBF] flex items-center justify-center transition-colors">
-                    <Icon className="w-5 h-5" />
+                ) : (
+                  <div className="flex items-center justify-between px-6 pt-6">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0E9F80]/10 text-[#0E7664] transition-colors group-hover:bg-[#07162C] group-hover:text-[#B8E9DF]"><Icon className="h-5 w-5" /></div>
+                    <span className="rounded-full bg-[#F3F0E7] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#78663A]">{srv.badge}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#1B1A4E] group-hover:text-[#3B2FBF] transition-colors">
-                    {srv.title}
-                  </h3>
-                  <p className="text-xs text-[#55587A] leading-relaxed">
-                    {srv.desc}
-                  </p>
+                )}
+                <div className="flex flex-1 flex-col px-6 py-5">
+                  <h3 className="text-base font-bold leading-snug text-[#101A2B] transition-colors group-hover:text-[#0E7664]">{srv.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#626B7A]">{srv.desc}</p>
+                  <div className="mt-auto flex items-center justify-between border-t border-[#EEF0F2] pt-4 mt-5 text-xs font-semibold text-[#253B55]"><span>Learn details & deliverables</span><ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></div>
                 </div>
-
-                <div className="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#3B2FBF]">
-                  <span>Learn details & deliverables</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
+              </button>
             );
           })}
 
-          {/* Unified Value Box */}
-          <div className="bg-[#1B1A4E] text-white rounded-xl p-6 flex flex-col justify-between">
+                    {/* Unified Value Box */}
+          <div className="bg-gradient-to-br from-[#0B1A2F] to-[#172B45] text-white rounded-2xl p-6 flex flex-col justify-between border border-white/10">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-[#0E9F80]">
                 Unified Delivery
@@ -314,7 +283,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="pt-6">
               <button
                 onClick={() => onNavigate('contact')}
-                className="w-full py-2.5 px-4 bg-[#0E9F80] hover:bg-[#0c886d] text-white text-xs font-bold rounded-lg transition-colors text-center"
+                className="w-full py-2.5 px-4 bg-[#C8B37A] hover:bg-[#DDCCA0] text-[#101A2B] text-xs font-bold rounded-xl transition-colors text-center"
               >
                 Talk to a Manpower Consultant
               </button>
@@ -324,7 +293,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* Sectors We Serve */}
-      <section className="bg-slate-50 py-16 border-y border-[#DCDDEE]">
+      <section className="bg-[#F6F4EE] py-20 border-y border-[#E8E0C7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#3B2FBF]">
@@ -343,7 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div
                 key={i}
                 onClick={() => onNavigate('industries')}
-                className="bg-white p-5 rounded-xl border border-[#DCDDEE] hover:border-[#3B2FBF] hover:shadow-sm transition-all cursor-pointer group"
+                className="bg-[#FCFBF7] p-5 rounded-2xl border border-[#E8E0C7] hover:border-[#C8B37A] hover:shadow-lg hover:shadow-[#101A2B]/5 transition-all cursor-pointer group"
               >
                 <div className="text-2xl mb-3">{ind.icon}</div>
                 <h3 className="text-sm font-bold text-[#1B1A4E] group-hover:text-[#3B2FBF] transition-colors">
@@ -368,6 +337,28 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
+      {/* Editorial workforce feature */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid overflow-hidden rounded-[1.75rem] bg-[#0B1A2F] text-white shadow-2xl shadow-[#101A2B]/15 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
+            <span className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#C8B37A]"><span className="h-px w-8 bg-[#C8B37A]" /> The UNIVA difference</span>
+            <h2 className="mt-5 text-2xl font-semibold leading-tight tracking-tight sm:text-4xl">People are the strategy.<span className="mt-1 block text-[#B8E9DF]">The details make it work.</span></h2>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-slate-300">Great hiring is thoughtful at every stage. We bring sourcing, screening, onboarding, and workforce compliance together in one accountable partnership.</p>
+            <div className="mt-7 grid grid-cols-3 gap-3 border-t border-white/15 pt-5">
+              <div><span className="block text-lg font-semibold text-white">01</span><span className="mt-1 block text-[10px] leading-snug text-slate-400">Listen closely</span></div>
+              <div><span className="block text-lg font-semibold text-white">02</span><span className="mt-1 block text-[10px] leading-snug text-slate-400">Source precisely</span></div>
+              <div><span className="block text-lg font-semibold text-white">03</span><span className="mt-1 block text-[10px] leading-snug text-slate-400">Support all the way</span></div>
+            </div>
+            <button onClick={() => onNavigate('how-we-work')} className="mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#E8E0C7] transition-colors hover:text-white">See how we work <ArrowUpRight className="h-4 w-4" /></button>
+          </div>
+          <div className="relative min-h-[17rem] sm:min-h-[22rem] lg:min-h-[30rem]">
+            <img src={workplaceAuditImage} alt="A safety and compliance review in a modern workplace" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B1A2F]/50 via-[#0B1A2F]/5 to-transparent lg:from-[#0B1A2F]/35" />
+            <div className="absolute bottom-5 left-5 rounded-xl border border-white/20 bg-[#07162C]/55 px-4 py-3 backdrop-blur-md sm:bottom-7 sm:left-7"><span className="block text-[10px] uppercase tracking-[0.18em] text-[#E8E0C7]">One connected approach</span><span className="mt-1 block text-xs font-semibold text-white">Talent · operations · compliance</span></div>
+          </div>
+        </div>
+      </section>
+
       {/* 10-Step Process Timeline */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="max-w-3xl space-y-3">
@@ -387,10 +378,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           {processSteps.map((s, idx) => (
             <div
               key={idx}
-              className="bg-white p-5 rounded-xl border border-[#DCDDEE] hover:border-[#3B2FBF] transition-all relative flex flex-col justify-between"
+              className="bg-white p-5 rounded-2xl border border-[#E4E4E8] hover:border-[#C8B37A]/70 hover:shadow-lg transition-all relative flex flex-col justify-between"
             >
               <div>
-                <div className="w-8 h-8 rounded-full bg-[#1B1A4E] text-white flex items-center justify-center text-xs font-extrabold mb-3">
+                <div className="w-8 h-8 rounded-full bg-[#C8B37A] text-[#101A2B] flex items-center justify-center text-xs font-extrabold mb-3">
                   {s.step}
                 </div>
                 <h3 className="text-sm font-bold text-[#1B1A4E] leading-snug">
@@ -418,7 +409,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* Why Choose Us Grid (8 Reasons) */}
-      <section className="bg-[#1B1A4E] text-white py-16">
+      <section className="bg-[#0B1A2F] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0E9F80]">
@@ -436,7 +427,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             {whyChooseUs.map((reason) => (
               <div
                 key={reason.num}
-                className="bg-slate-800/80 p-6 rounded-xl border border-slate-700 hover:border-[#0E9F80] transition-colors"
+                className="bg-white/[0.045] p-6 rounded-2xl border border-white/10 hover:border-[#C8B37A]/60 hover:bg-white/[0.07] transition-all"
               >
                 <div className="w-8 h-8 rounded-full bg-[#0E9F80] text-[#1B1A4E] flex items-center justify-center text-xs font-extrabold mb-3">
                   {reason.num}
@@ -480,7 +471,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           {latestJobs.map((job) => (
             <div
               key={job.id}
-              className="bg-white rounded-xl border border-[#DCDDEE] p-6 hover:shadow-md hover:border-[#3B2FBF] transition-all flex flex-col justify-between group"
+              className="bg-[#FCFBF7] rounded-2xl border border-[#E8E0C7] p-6 hover:shadow-xl hover:shadow-[#101A2B]/8 hover:border-[#C8B37A] transition-all flex flex-col justify-between group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs text-[#55587A]">
@@ -535,7 +526,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           ))}
         </div>
 
-        <div className="bg-slate-100 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#F1EEE5] rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h4 className="text-sm font-bold text-[#1B1A4E]">
               Can&apos;t find a role matching your senior profile?
@@ -555,7 +546,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* Final High-Impact CTA Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-[#1B1A4E] to-[#3B2FBF] text-white rounded-2xl p-8 sm:p-12 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-br from-[#0B1A2F] via-[#142942] to-[#1B1A4E] text-white rounded-[1.75rem] p-8 sm:p-12 shadow-2xl border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-4 max-w-2xl">
             <span className="text-xs font-extrabold uppercase tracking-widest text-[#0E9F80]">
               Partner With UNIVA HIRE TECH
@@ -571,7 +562,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto shrink-0">
             <button
               onClick={() => onNavigate('contact')}
-              className="px-6 py-3.5 bg-[#0E9F80] hover:bg-[#0c886d] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-md transition-all text-center"
+              className="px-6 py-3.5 bg-[#C8B37A] hover:bg-[#DDCCA0] text-[#101A2B] font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all text-center"
             >
               Hire Talent / Corporate Enquiry
             </button>
