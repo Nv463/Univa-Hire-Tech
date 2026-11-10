@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import {
   Users,
   Briefcase,
@@ -265,9 +266,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   return (
     <div className="space-y-16 pb-20">
       {/* Services Header */}
-      <section className="bg-[#1B1A4E] text-white py-16 lg:py-20">
+      <PageHeroCarousel page="services" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#B8E9DF] font-bold">
             Comprehensive Manpower & Business Support
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -277,7 +278,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             Seven integrated workforce and corporate support services. Deploy individual solutions for targeted requirements, or combine them under one roof for complete organizational peace of mind.
           </p>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* Interactive Service Switcher & Details Container */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

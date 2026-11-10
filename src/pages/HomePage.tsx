@@ -1,5 +1,5 @@
 import React from 'react';
-import heroImage from '../assets/images/hero_executive_corporate_1793911532663.jpg';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import staffingImage from '../assets/images/service_contract_staffing_1793911533906.jpg';
 import executiveSearchImage from '../assets/images/service_executive_search_1793911534916.jpg';
 import workplaceAuditImage from '../assets/images/workplace_audit_safety_1793911535061.jpg';
@@ -159,7 +159,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="space-y-24 sm:space-y-28 pb-24">
       {/* Hero Section */}
       <section className="relative isolate overflow-hidden bg-[#07162C] text-white py-16 sm:py-20 lg:py-24">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_20%,rgba(14,159,128,0.22),transparent_36%),radial-gradient(ellipse_at_10%_90%,rgba(59,47,191,0.32),transparent_44%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_20%,rgba(14,159,128,0.18),transparent_36%),radial-gradient(ellipse_at_10%_90%,rgba(200,179,122,0.14),transparent_44%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.04fr_0.96fr] gap-12 lg:gap-16 items-center">
           <div className="max-w-2xl space-y-6">
             <div className="flex items-center gap-3 text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#C8B37A] font-bold"><span className="h-px w-8 bg-[#C8B37A]" />Third-party staffing · Recruitment · Workforce management</div>
@@ -184,12 +184,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
           <div className="relative max-w-2xl w-full mx-auto lg:mx-0 lg:ml-auto">
             <div aria-hidden="true" className="absolute -inset-3 sm:-inset-4 rounded-[2rem] border border-[#C8B37A]/30 rotate-2" />
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.7rem] border border-white/15 bg-[#142942] shadow-2xl shadow-black/40">
-              <img src={heroImage} alt="UNIVA HIRE TECH team collaborating in a corporate setting" className="w-full h-full object-cover" fetchPriority="high" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07162C]/80 via-[#07162C]/10 to-[#07162C]/5" />
+            <PageHeroCarousel page="home" imageOnly className="relative aspect-[4/3] overflow-hidden rounded-[1.7rem] border border-white/15 bg-[#142942] shadow-2xl shadow-black/40">
               <div className="absolute top-5 left-5 flex items-center gap-2 rounded-full border border-white/20 bg-[#07162C]/45 px-3 py-2 backdrop-blur-md"><span className="h-1.5 w-1.5 rounded-full bg-[#B8E9DF]" /><span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">Talent. Trust. Transformation.</span></div>
               <div className="absolute bottom-5 right-5 text-right"><span className="block text-[10px] uppercase tracking-[0.2em] text-[#E8E0C7]">Built around</span><span className="text-lg sm:text-xl font-semibold text-white">your next chapter</span></div>
-            </div>
+            </PageHeroCarousel>
             <div className="absolute -bottom-7 left-3 sm:left-8 flex items-center gap-3 rounded-2xl border border-[#E8E0C7]/70 bg-[#FCFBF7] px-4 py-3 shadow-xl shadow-black/20">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0E9F80]/10 text-[#0E7664]"><ShieldCheck className="h-5 w-5" /></div>
               <div><span className="block text-xs font-bold text-[#101A2B]">Compliance, considered.</span><span className="block text-[10px] text-slate-500">Clear processes from day one</span></div>

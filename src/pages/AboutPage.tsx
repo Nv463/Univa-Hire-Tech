@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import aboutImage from '../assets/images/service_executive_search_1793911534916.jpg';
 import {
   ShieldCheck,
@@ -66,9 +67,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-16 pb-20">
       {/* Page Header Banner */}
-      <section className="bg-[#1B1A4E] text-white py-16 lg:py-20">
+      <PageHeroCarousel page="about" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#B8E9DF] font-bold">
             About UNIVA HIRE TECH
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -97,7 +98,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </button>
           </div>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* Who We Are & Narrative */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

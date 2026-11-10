@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import { apiFetch } from '../lib/api';
 import {
   Mail,
@@ -111,9 +112,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   return (
     <div className="space-y-16 pb-20">
       {/* Header Banner */}
-      <section className="bg-[#1B1A4E] text-white py-16 lg:py-20">
+      <PageHeroCarousel page="contact" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#B8E9DF] font-bold">
             Corporate Client Inquiries
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -123,7 +124,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
             Partner with UNIVA HIRE TECH for dependable, compliant, and cost-effective manpower solutions. Connect directly with our Senior Talent Solutions team.
           </p>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* Main Grid: Form & Corporate Coordinates */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import {
   Search,
   MapPin,
@@ -231,9 +232,9 @@ export const JobsPage: React.FC<JobsPageProps> = ({
   return (
     <div className="space-y-12 pb-24">
       {/* Header */}
-      <section className="bg-[#1B1A4E] text-white py-16 lg:py-20">
+      <PageHeroCarousel page="jobs" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#B8E9DF] font-bold">
             Executive & Senior Opportunities
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -256,7 +257,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
             </span>
           </div>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

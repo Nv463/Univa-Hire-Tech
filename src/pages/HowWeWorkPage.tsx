@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import {
   Search,
   FileSpreadsheet,
@@ -117,9 +118,9 @@ export const HowWeWorkPage: React.FC<HowWeWorkPageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-16 pb-20">
       {/* Header */}
-      <section className="bg-[#1B1A4E] text-white py-16 lg:py-20">
+      <PageHeroCarousel page="how-we-work" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#0E9F80] font-bold">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#B8E9DF] font-bold">
             Methodology & Governance
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -129,7 +130,7 @@ export const HowWeWorkPage: React.FC<HowWeWorkPageProps> = ({ onNavigate }) => {
             A proven ten-step delivery process, from first requirement conversation to continuous employee support and compliance governance.
           </p>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* 10-Step Visual Stepper */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
