@@ -20,6 +20,9 @@ import {
 import { Job, Application } from '../types';
 import { apiFetch } from '../lib/api';
 
+const normalizeIndustry = (industry: string) =>
+  industry === 'Healthcare' ? 'Pharmaceuticals & Healthcare' : industry;
+
 interface JobsPageProps {
   jobs: Job[];
   onNavigate: (page: string) => void;
@@ -105,7 +108,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
     ];
 
     // Keep any legacy or custom industry values already used by published jobs.
-    return Array.from(new Set([...standardIndustries, ...jobs.map((job) => job.industry).filter(Boolean)]));
+    return Array.from(new Set([...standardIndustries, ...jobs.map((job) => normalizeIndustry(job.industry)).filter(Boolean)]));
   }, [jobs]);
 
   // Filtered jobs
@@ -125,7 +128,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
         job.location.toLowerCase().includes(selectedLocation.toLowerCase());
 
       const matchesIndustry =
-        selectedIndustry === 'all' || job.industry === selectedIndustry;
+        selectedIndustry === 'all' || normalizeIndustry(job.industry) === selectedIndustry;
 
       const matchesType =
         selectedType === 'all' || job.employment_type === selectedType;
@@ -416,7 +419,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-2 text-xs font-semibold text-[#3B2FBF]">
-                        <span>{job.industry}</span>
+                        <span>{normalizeIndustry(job.industry)}</span>
                         <span aria-hidden="true">·</span>
                         <span className="text-[#55587A] font-normal">{job.department}</span>
                       </div>
@@ -496,7 +499,7 @@ export const JobsPage: React.FC<JobsPageProps> = ({
             <div className="flex items-start justify-between border-b border-[#DCDDEE] pb-4">
               <div>
                 <div className="flex items-center gap-2 text-xs font-bold text-[#3B2FBF]">
-                  <span>{activeJob.industry}</span>
+                  <span>{normalizeIndustry(activeJob.industry)}</span>
                   <span aria-hidden="true">·</span>
                   <span className="text-[#55587A]">{activeJob.department}</span>
                   <span aria-hidden="true">·</span>
