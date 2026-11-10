@@ -89,7 +89,23 @@ export const JobsPage: React.FC<JobsPageProps> = ({
   }, [jobs]);
 
   const industries = useMemo(() => {
-    return Array.from(new Set(jobs.map((j) => j.industry)));
+    const standardIndustries = [
+      'IT & Software',
+      'Manufacturing',
+      'Construction & Infrastructure',
+      'Banking & Financial Services (BFSI)',
+      'Pharmaceuticals & Healthcare',
+      'Retail & E-commerce',
+      'Logistics & Supply Chain',
+      'FMCG & Consumer Goods',
+      'Telecom',
+      'Food & Beverage',
+      'Oil, Gas & Energy',
+      'Corporate & Professional Services',
+    ];
+
+    // Keep any legacy or custom industry values already used by published jobs.
+    return Array.from(new Set([...standardIndustries, ...jobs.map((job) => job.industry).filter(Boolean)]));
   }, [jobs]);
 
   // Filtered jobs
