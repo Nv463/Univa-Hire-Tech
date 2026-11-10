@@ -307,7 +307,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     setEditingJob(job);
     setJobTitle(job.title);
     setJobDept(job.department);
-    setJobIndustry(job.industry);
+    setJobIndustry(job.industry === 'Healthcare' ? 'Pharmaceuticals & Healthcare' : job.industry);
     setJobLocation(job.location);
     setJobType(job.employment_type);
     setJobSeniority(job.seniority);
@@ -1402,7 +1402,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#3B2FBF]">{job.industry}</span>
+                    <span className="text-xs font-bold text-[#3B2FBF]">{job.industry === 'Healthcare' ? 'Pharmaceuticals & Healthcare' : job.industry}</span>
                     <span
                       className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                         job.status === 'Open'
@@ -1523,7 +1523,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     <option value="Construction & Infrastructure">Construction & Infrastructure</option>
                     <option value="Banking & Financial Services (BFSI)">Banking & Financial Services (BFSI)</option>
                     <option value="Pharmaceuticals & Healthcare">Pharmaceuticals & Healthcare</option>
-                    <option value="Healthcare">Healthcare (existing jobs)</option>
                     <option value="Retail & E-commerce">Retail & E-commerce</option>
                     <option value="Logistics & Supply Chain">Logistics & Supply Chain</option>
                     <option value="FMCG & Consumer Goods">FMCG & Consumer Goods</option>
