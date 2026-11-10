@@ -1522,9 +1522,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     <option value="Manufacturing">Manufacturing</option>
                     <option value="Construction & Infrastructure">Construction & Infrastructure</option>
                     <option value="Banking & Financial Services (BFSI)">Banking & Financial Services (BFSI)</option>
-                    <option value="Healthcare">Healthcare</option>
+                    <option value="Pharmaceuticals & Healthcare">Pharmaceuticals & Healthcare</option>
+                    <option value="Healthcare">Healthcare (existing jobs)</option>
                     <option value="Retail & E-commerce">Retail & E-commerce</option>
                     <option value="Logistics & Supply Chain">Logistics & Supply Chain</option>
+                    <option value="FMCG & Consumer Goods">FMCG & Consumer Goods</option>
+                    <option value="Telecom">Telecom</option>
+                    <option value="Food & Beverage">Food & Beverage</option>
+                    <option value="Oil, Gas & Energy">Oil, Gas & Energy</option>
                     <option value="Corporate & Professional Services">Corporate & Professional Services</option>
                   </select>
                 </div>
