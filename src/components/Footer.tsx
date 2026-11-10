@@ -135,7 +135,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
-                  Healthcare & Life Sciences
+                  Pharmaceuticals & Healthcare
                 </button>
               </li>
               <li>
@@ -146,6 +146,31 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li>
                 <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
                   Logistics & Supply Chain
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
+                  FMCG & Consumer Goods
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
+                  Telecom
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
+                  Food & Beverage
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
+                  Oil, Gas & Energy
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('industries')} className="hover:text-white transition-colors">
+                  Corporate & Professional Services
                 </button>
               </li>
             </ul>
