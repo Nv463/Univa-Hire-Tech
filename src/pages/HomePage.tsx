@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageHeroCarousel } from '../components/PageHeroCarousel';
 import staffingImage from '../assets/images/service_contract_staffing_1793911533906.jpg';
 import executiveSearchImage from '../assets/images/service_executive_search_1793911534916.jpg';
@@ -40,6 +40,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   onSelectJob,
 }) => {
   const latestJobs = jobs.slice(0, 6);
+  const serviceCategories = ['All Services', 'Talent', 'Workforce', 'Employee Experience'];
+  const [activeServiceCategory, setActiveServiceCategory] = useState('All Services');
 
   const trustPoints = [
     {
@@ -67,6 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const services = [
     {
       title: 'Contract Staffing',
+      category: 'Talent',
       desc: "Executive-to-Senior-level contract staffing on UNIVA's payroll, payroll and statutory administration, scale up or down without permanent headcount.",
       icon: Users,
       badge: 'Core Solution',
@@ -74,6 +77,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Recruitment Services',
+      category: 'Talent',
       desc: 'Permanent Recruitment, Executive Search, Requirement Fulfilment, Candidate Screening, and Recruitment Process Outsourcing (RPO).',
       icon: Briefcase,
       badge: 'Executive Search',
@@ -81,6 +85,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Corporate Event Management',
+      category: 'Employee Experience',
       desc: 'Planning, coordination and on-ground execution for conferences, seminars, employee engagement activities, and annual celebrations.',
       icon: Calendar,
       badge: 'Engagement',
@@ -88,6 +93,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Audit Services',
+      category: 'Workforce',
       desc: 'Workplace safety compliance audits, HR process & documentation audits, ISO audit support, operational risk assessment, and gap analyses.',
       icon: FileCheck2,
       badge: 'Governance',
@@ -95,6 +101,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Training & Skill Development',
+      category: 'Employee Experience',
       desc: 'Technical skills development, communication and soft-skills, employee development journeys, professional corporate programs, and safety awareness.',
       icon: GraduationCap,
       badge: 'Capability',
@@ -102,6 +109,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Workplace Safety Training & Support',
+      category: 'Workforce',
       desc: 'Safety awareness programs, hazard identification & risk assessment (HIRA), instructor-led training, and site safety inspections.',
       icon: AlertTriangle,
       badge: 'Safety First',
@@ -109,6 +117,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       title: 'Onboarding & HR Support',
+      category: 'Workforce',
       desc: 'Joining formalities, documentation verification, HR records management, attendance & leave administration, and employee grievance support.',
       icon: UserCheck,
       badge: 'Lifecycle',
@@ -157,44 +166,47 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <div className="space-y-24 sm:space-y-28 pb-24">
-      {/* Hero Section */}
-      <section className="relative isolate overflow-hidden bg-[#07162C] text-white py-16 sm:py-20 lg:py-24">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_20%,rgba(14,159,128,0.18),transparent_36%),radial-gradient(ellipse_at_10%_90%,rgba(200,179,122,0.14),transparent_44%)]" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.04fr_0.96fr] gap-12 lg:gap-16 items-center">
-          <div className="max-w-2xl space-y-6">
-            <div className="flex items-center gap-3 text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#C8B37A] font-bold"><span className="h-px w-8 bg-[#C8B37A]" />Third-party staffing · Recruitment · Workforce management</div>
-            <h1 className="text-4xl sm:text-5xl lg:text-[4.25rem] font-semibold tracking-[-0.045em] text-white leading-[1.04]">
+      {/* Full-width interactive image carousel */}
+      <PageHeroCarousel
+        page="home"
+        imageOnly
+        className="min-h-[640px] sm:min-h-[720px] lg:min-h-[760px] flex items-center"
+      >
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#07162C]/95 via-[#07162C]/75 to-[#07162C]/20" />
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+          <div className="max-w-3xl space-y-7">
+            <div className="inline-flex items-center gap-3 rounded-full border border-[#C8B37A]/40 bg-[#07162C]/45 px-4 py-2 text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#E8E0C7] font-bold backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#B8E9DF]" />
+              Pan-India talent and workforce solutions
+            </div>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-[-0.045em] text-white leading-[1.04]">
               The right people,
               <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#B8E9DF] via-[#E8E0C7] to-[#C8B37A]">behind every</span>
               <span className="block">business milestone.</span>
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed max-w-xl">
-              Your strategic manpower partner for executive recruitment, flexible staffing, and compliance-led workforce solutions across India.
+            <p className="text-base sm:text-lg lg:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl">
+              Your strategic partner for executive recruitment, flexible staffing, and compliance-led workforce solutions across India.
             </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-              <button onClick={() => onNavigate('contact')} className="px-6 py-3.5 bg-[#C8B37A] text-[#101A2B] hover:bg-[#DDCCA0] font-bold text-sm rounded-xl shadow-lg shadow-black/20 transition-all flex items-center justify-center gap-2 cursor-pointer"><span>Discuss your hiring needs</span><ArrowRight className="w-4 h-4" /></button>
-              <button onClick={() => onNavigate('jobs')} className="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/15"><Briefcase className="w-4 h-4 text-[#B8E9DF]" /><span>Explore open roles</span></button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+              <button onClick={() => onNavigate('contact')} className="px-6 py-3.5 bg-[#C8B37A] text-[#101A2B] hover:bg-[#DDCCA0] font-bold text-sm rounded-xl shadow-lg shadow-black/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>Discuss your hiring needs</span><ArrowRight className="w-4 h-4" />
+              </button>
+              <button onClick={() => onNavigate('jobs')} className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/25 backdrop-blur-md">
+                <Briefcase className="w-4 h-4 text-[#B8E9DF]" /><span>Explore open roles</span>
+              </button>
+              <button onClick={() => onNavigate('industries')} className="px-6 py-3.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/20">
+                <Building2 className="w-4 h-4 text-[#E8E0C7]" /><span>Explore industries</span>
+              </button>
             </div>
-            <div className="pt-6 border-t border-white/15 grid grid-cols-2 gap-x-6 gap-y-5 text-xs text-slate-300">
-              <div><span className="block text-xl sm:text-2xl font-semibold text-white tabular-nums">10-step</span><span className="text-slate-400">structured delivery model</span></div>
-              <div><span className="block text-xl sm:text-2xl font-semibold text-white tabular-nums">7 services</span><span className="text-slate-400">under one partner</span></div>
-              <div><span className="block text-xl sm:text-2xl font-semibold text-white">Pan-India</span><span className="text-slate-400">metropolitan sourcing</span></div>
-              <div><span className="block text-xl sm:text-2xl font-semibold text-white">People-first</span><span className="text-slate-400">with compliance built in</span></div>
-            </div>
-          </div>
-          <div className="relative max-w-2xl w-full mx-auto lg:mx-0 lg:ml-auto">
-            <div aria-hidden="true" className="absolute -inset-3 sm:-inset-4 rounded-[2rem] border border-[#C8B37A]/30 rotate-2" />
-            <PageHeroCarousel page="home" imageOnly className="relative aspect-[4/3] overflow-hidden rounded-[1.7rem] border border-white/15 bg-[#142942] shadow-2xl shadow-black/40">
-              <div className="absolute top-5 left-5 flex items-center gap-2 rounded-full border border-white/20 bg-[#07162C]/45 px-3 py-2 backdrop-blur-md"><span className="h-1.5 w-1.5 rounded-full bg-[#B8E9DF]" /><span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">Talent. Trust. Transformation.</span></div>
-              <div className="absolute bottom-5 right-5 text-right"><span className="block text-[10px] uppercase tracking-[0.2em] text-[#E8E0C7]">Built around</span><span className="text-lg sm:text-xl font-semibold text-white">your next chapter</span></div>
-            </PageHeroCarousel>
-            <div className="absolute -bottom-7 left-3 sm:left-8 flex items-center gap-3 rounded-2xl border border-[#E8E0C7]/70 bg-[#FCFBF7] px-4 py-3 shadow-xl shadow-black/20">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0E9F80]/10 text-[#0E7664]"><ShieldCheck className="h-5 w-5" /></div>
-              <div><span className="block text-xs font-bold text-[#101A2B]">Compliance, considered.</span><span className="block text-[10px] text-slate-500">Clear processes from day one</span></div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl border-t border-white/20 pt-6 text-xs text-slate-200">
+              <div><span className="block text-lg sm:text-xl font-semibold text-white tabular-nums">10-step</span><span className="text-slate-300">structured delivery</span></div>
+              <div><span className="block text-lg sm:text-xl font-semibold text-white tabular-nums">7 services</span><span className="text-slate-300">one partner</span></div>
+              <div><span className="block text-lg sm:text-xl font-semibold text-white">Pan-India</span><span className="text-slate-300">metropolitan sourcing</span></div>
+              <div><span className="block text-lg sm:text-xl font-semibold text-white">People-first</span><span className="text-slate-300">compliance built in</span></div>
             </div>
           </div>
         </div>
-      </section>
+      </PageHeroCarousel>
 
       {/* Strip of 4 Key Points */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
@@ -246,8 +258,29 @@ export const HomePage: React.FC<HomePageProps> = ({
           </button>
         </div>
 
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div role="group" aria-label="Filter services" className="flex flex-wrap gap-2">
+            {serviceCategories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                aria-pressed={activeServiceCategory === category}
+                onClick={() => setActiveServiceCategory(category)}
+                className={`rounded-full px-4 py-2 text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8B37A] focus:ring-offset-2 ${activeServiceCategory === category ? 'bg-[#1B1A4E] text-white shadow-md' : 'bg-white text-[#55587A] border border-[#DCDDEE] hover:border-[#3B2FBF] hover:text-[#3B2FBF]'}`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <span className="text-xs text-[#55587A]">
+            {activeServiceCategory === 'All Services'
+              ? 'Explore our complete service portfolio'
+              : `Showing ${services.filter((service) => service.category === activeServiceCategory).length} ${activeServiceCategory.toLowerCase()} services`}
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((srv) => {
+          {services.filter((srv) => activeServiceCategory === 'All Services' || srv.category === activeServiceCategory).map((srv) => {
             const Icon = srv.icon;
             return (
               <button type="button" key={srv.title} onClick={() => onNavigate('services')} className="group flex h-full min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-[#E4E4E8] bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#C8B37A]/70 hover:shadow-xl hover:shadow-[#101A2B]/10">
