@@ -119,8 +119,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   const industries = [
     { name: 'IT & Software', desc: 'Technical, support and IT GCC operations', icon: '💻' },
     { name: 'Manufacturing', desc: 'Plant, production, quality and maintenance', icon: '⚙️' },
-    { name: 'Construction & Infra', desc: 'Site, civil, project and skilled trades', icon: '🏗️' },
-    { name: 'Banking & Financial (BFSI)', desc: 'Risk, compliance, sales and back office', icon: '🏛️' },
+    { name: 'Construction & Infrastructure', desc: 'Site, civil, project and skilled trades', icon: '🏗️' },
+    { name: 'Banking & Financial Services (BFSI)', desc: 'Risk, compliance, sales and back office', icon: '🏛️' },
     { name: 'Pharmaceuticals & Healthcare', desc: 'Pharmaceuticals, clinical support, hospital administration and facilities', icon: '🏥' },
     { name: 'Retail & E-commerce', desc: 'Store, fulfillment and customer service operations', icon: '🛍️' },
     { name: 'Logistics & Supply Chain', desc: 'Warehouse, transport and distribution hubs', icon: '🚚' },
@@ -128,7 +128,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     { name: 'Telecom', desc: 'Telecom networks, infrastructure and customer operations', icon: '📡' },
     { name: 'Food & Beverage', desc: 'Food production, quality, packaging and supply chains', icon: '🥗' },
     { name: 'Oil, Gas & Energy', desc: 'Energy production, infrastructure, maintenance and safety', icon: '⚡' },
-    { name: 'Corporate & Professional', desc: 'Corporate, HR, finance and support leadership', icon: '🏢' },
+    { name: 'Corporate & Professional Services', desc: 'Corporate, HR, finance and support leadership', icon: '🏢' },
   ];
 
   const whyChooseUs = [
