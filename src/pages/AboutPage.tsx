@@ -76,7 +76,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             One Partner for the Workforce & the Workplace.
           </h1>
           <p className="text-base sm:text-lg text-slate-200 max-w-3xl leading-relaxed">
-            Delivering integrated manpower, recruitment, and business support solutions designed to help organizations operate with total confidence and compliance across India.
+            Delivering Compliance focussed contract staffing and business support designed to help organizations operate with total confidence across India.
           </p>
 
           <div className="pt-4 flex flex-wrap gap-4">
