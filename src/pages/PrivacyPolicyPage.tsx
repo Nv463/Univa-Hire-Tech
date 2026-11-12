@@ -98,7 +98,6 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
           <div className="text-xs space-y-1 text-[#1B1A4E] font-medium pt-1">
             <div>Data Grievance Officer, UNIVA HIRE TECH</div>
             <div>Email: <a href="mailto:privacy@univahiretech.com" className="text-[#3B2FBF] underline">privacy@univahiretech.com</a></div>
-            <div>Headquarters: Level 8, UB City Tower, Bengaluru, Karnataka – 560001</div>
           </div>
         </section>
       </div>
