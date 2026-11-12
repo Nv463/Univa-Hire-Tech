@@ -190,12 +190,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#0E9F80] shrink-0" />
-                <a href="mailto:vineetsingh@univahtech.com" className="hover:text-white break-all">
-                  vineetsingh@univahtech.com
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#0E9F80] shrink-0" />
                 <a href="mailto:Info@univahtech.com" className="hover:text-white break-all">
                   Info@univahtech.com
                 </a>
