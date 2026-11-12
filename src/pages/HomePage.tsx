@@ -185,7 +185,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <span className="block">business milestone.</span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl">
-              Your strategic partner for executive recruitment, flexible staffing, and compliance-led workforce solutions across India.
+              Your strategic partner for contract staffing, compliance-led workforce management and corporate solutions across India.
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
               <button onClick={() => onNavigate('contact')} className="px-6 py-3.5 bg-[#C8B37A] text-[#101A2B] hover:bg-[#DDCCA0] font-bold text-sm rounded-xl shadow-lg shadow-black/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
