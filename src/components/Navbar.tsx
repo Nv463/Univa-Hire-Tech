@@ -38,7 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="hidden md:flex items-center gap-4 text-[11px] text-slate-300">
           <span>Pan India Corporate Solutions</span>
           <span aria-hidden="true">·</span>
-          <span>Bengaluru · Mumbai · Gurugram · Pune · Hyderabad · Chennai</span>
+          <span>Delhi NCR · Bengaluru · Mumbai · Gurugram · Pune · Hyderabad · Chennai</span>
           <span aria-hidden="true">·</span>
         </div>
       </div>
