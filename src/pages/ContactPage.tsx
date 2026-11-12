@@ -4,7 +4,6 @@ import { apiFetch } from '../lib/api';
 import {
   Mail,
   Phone,
-  MapPin,
   Globe,
   Building,
   CheckCircle2,
@@ -318,15 +317,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               <div className="space-y-4 text-xs text-slate-200">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#0E9F80] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="block text-white font-semibold">Headquarters & Tech Hub</strong>
-                    <span>Level 8, UB City Tower / Outer Ring Road Hub</span><br />
-                    <span>Bengaluru, Karnataka – 560001, India</span>
-                  </div>
-                </div>
-
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-[#0E9F80] shrink-0 mt-0.5" />
                   <div>
