@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnivaLogo } from './UnivaLogo';
-import { Download, Mail, Phone, MapPin, ExternalLink, CheckCircle2, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { Download, Mail, Phone, ExternalLink, CheckCircle2, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -179,17 +179,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 5: Contact & Hubs */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#0E9F80] mb-4">
-              Corporate Office
+              Get in touch
             </h4>
             <div className="space-y-3 text-xs text-slate-300">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#0E9F80] shrink-0 mt-0.5" />
-                <span>
-                  UNIVA HIRE TECH India<br />
-                  Level 8, UB City / Outer Ring Road Hub<br />
-                  Bengaluru, Karnataka – 560001
-                </span>
-              </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#0E9F80] shrink-0" />
                 <a href="tel:+918049208000" className="hover:text-white">
@@ -198,8 +190,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#0E9F80] shrink-0" />
-                <a href="mailto:contact@univahiretech.com" className="hover:text-white">
-                  contact@univahiretech.com
+                <a href="mailto:vineetsingh@univahtech.com" className="hover:text-white break-all">
+                  vineetsingh@univahtech.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#0E9F80] shrink-0" />
+                <a href="mailto:Info@univahtech.com" className="hover:text-white break-all">
+                  Info@univahtech.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#0E9F80] shrink-0" />
+                <a href="mailto:Contact@univahtech.com" className="hover:text-white break-all">
+                  Contact@univahtech.com
                 </a>
               </div>
               <div className="pt-2 text-[11px] text-slate-400">
@@ -220,14 +224,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           <nav aria-label="Social media" className="flex items-center gap-3">
-            <a href="https://www.instagram.com/univahtech/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
-              <Instagram className="h-4 w-4" />
+            <a href="https://www.instagram.com/univahtech/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full border border-white/15 p-3 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
+              <Instagram className="h-6 w-6" />
             </a>
             <a href="https://www.facebook.com/profile.php?id=61596353462036&amp;sk=directory_education" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
-              <Facebook className="h-4 w-4" />
+              <Facebook className="h-6 w-6" />
             </a>
             <a href="https://www.linkedin.com/in/univa-hire-tech-05049b44a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="rounded-full border border-white/15 p-2 text-slate-300 transition-colors hover:border-[#C8B37A] hover:text-[#C8B37A]">
-              <Linkedin className="h-4 w-4" />
+              <Linkedin className="h-6 w-6" />
             </a>
           </nav>
         </div>
